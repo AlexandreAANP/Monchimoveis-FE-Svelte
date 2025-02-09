@@ -4,6 +4,7 @@
     import { cubicOut } from 'svelte/easing';
     import { slide } from 'svelte/transition';
     import Items from './Items.svelte';
+    import { onMount } from "svelte";
 
     let isOnTop = true;
     let openNav = false;
@@ -18,7 +19,7 @@
 
     let title = "Monchimóveis";
 
-    import { onMount } from "svelte";
+    
 
 
     onMount(() => {
