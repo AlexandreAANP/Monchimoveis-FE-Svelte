@@ -5,6 +5,7 @@
     let subtitle = "Móveis Rústicos de Madeira Natural";
     let buttonContent = "SABER MAIS";
     let buttonHref = "#about";
+    import { base } from '$app/paths';
 </script>
 
 <style>
@@ -76,7 +77,7 @@
 </style>
 
 <header>
-    <div class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background-image: {`url(${props.imageUrl})`}">
+    <div class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background-image: {`url(${base}${props.imageUrl})`}">
         <div class="absolute top-0 left-0 w-full h-full mainDiv2">
             <div class="container mx-auto text-center">
                 <div class="row">
