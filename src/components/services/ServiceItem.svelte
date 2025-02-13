@@ -21,6 +21,10 @@
     font-weight: 500;
     color: #333;
 }
+.hr-for-mobile {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .services-h3  {
         font-size: 20px;
@@ -28,6 +32,9 @@
     .services-p {
         font-size: 15px;
         text-align: justify;
+    }
+    .hr-for-mobile {
+        display: block;
     }
 }
 </style>

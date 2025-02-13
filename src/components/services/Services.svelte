@@ -58,11 +58,16 @@
 #services .divItem {
     margin-top: 70px;
 }
-
+.hr-for-mobile {
+    display: none;
+}
 
 @media (max-width: 768px) {
     #services .service-p-title {
         font-size: 16px;
+    }
+    .hr-for-mobile {
+        display: block;
     }
 }
 </style>
@@ -77,8 +82,11 @@
         </p>
 
         <div class="flex flex-col md:flex-row flex-nowrap items-center justify-center gap-5 divItem">
-            {#each serviceItems as serviceItem}
+            {#each serviceItems as serviceItem, index}
                 <ServiceItem {...serviceItem}/>
+                {#if index !== serviceItems.length - 1}
+                    <hr class="hr hr-for-mobile"/>
+                {/if}
             {/each}
         </div>
     </div>
