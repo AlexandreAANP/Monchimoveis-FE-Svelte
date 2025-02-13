@@ -4,34 +4,10 @@
 
     let urlVideo: string = "https://www.youtube.com/embed/WyufinWKOUQ?si=FlvkoVI6Xu9uHmIY";
 </script>
-
-<div id="about" class="divAbout">
-    <div>
-        <div class="sectioTitle text-center center">
-            <h2 class="h2Title">{title}</h2>
-            <hr class="hrTitle" />
-
-            <div class="flex flex-col items-center">
-                <iframe
-                    class="w-3/4 h-64 md:w-1/2 md:h-96 shadow-gray-400 shadow-xl"
-                    src={urlVideo}
-                    title="Monchimoveis"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                >
-                </iframe>
-            </div>
-            <AboutText></AboutText>
-        </div>
-    </div>
-</div>
-
 <style>
-    .divAbout {
+    #about {
         padding: 120px 0;
-        background-color: #f6f6f6;
+        background-color: #f9f9f9;
     }
 
     #about .sectioTitle {
@@ -59,7 +35,7 @@
     }
 
     @media (max-width: 768px) {
-        .divAbout {
+        #about {
             padding-top: 50px;
         }
         #about .sectioTitle {
@@ -74,3 +50,26 @@
         }
     }
 </style>
+
+<div id="about" >
+        <div class="sectioTitle text-center center">
+            <h2 class="h2Title">{title}</h2>
+            <hr class="hrTitle" />
+
+            <div class="flex flex-col items-center">
+                <iframe
+                    class="w-3/4 h-64 md:w-1/2 md:h-96 shadow-gray-400 shadow-xl"
+                    src={urlVideo}
+                    title="Monchimoveis"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                >
+                </iframe>
+            </div>
+            <AboutText></AboutText>
+        </div>
+    
+</div>
+

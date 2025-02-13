@@ -54,6 +54,7 @@
 #services {
     padding-top: 120px;
     padding-bottom: 30px;
+
 }
 #services .divItem {
     margin-top: 70px;
