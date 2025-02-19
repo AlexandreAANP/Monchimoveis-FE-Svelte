@@ -28,7 +28,8 @@
 
     ];
 
-    let filteredItems = items.filter(item => item.cat === active || active === "all");
+
+    // let filteredItems = items.filter(item => item.cat === active || active === "all");
 
     
 </script>
@@ -84,12 +85,14 @@
                         {button.name}
                     </Button>
                 {/each}
+                
             <div class="divItems flex flex-wrap items-left justify-between gap-5">
-                {#each filteredItems as item}
-                    <PortofolioItem title={item.title} urlImage={item.image} url={item.url}/>
+                {#each items as item}
+                    {#if active === "all" || active === item.cat}
+                        <PortofolioItem title={item.title} urlImage={item.image} url={item.url}/>
+                    {/if}
                 {/each}
             </div>
-            <!-- {filteredItems} -->
 
 
             </div>

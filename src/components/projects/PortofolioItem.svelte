@@ -1,4 +1,5 @@
 <script>
+    import {fly} from 'svelte/transition';
     const props = $props();
 </script>
 <style>
@@ -54,12 +55,17 @@
     .portofolioItem .overlay{
         display: none;
     }
+
+
     
 }
 
 </style>
 
-<div class="portofolioItem relative max-w-xs overflow-hidden bg-cover bg-no-repeat">
+<div 
+in:fly={{ y: 100, opacity: 0, duration: 600 }}
+out:fly={{ y: -100, opacity: 0, duration: 600 }}
+class="portofolioItem relative max-w-xs overflow-hidden bg-cover bg-no-repeat flex flex-col items-center justify-center">
     <img
         src={props.urlImage}
         class="max-w-xs"
