@@ -13,7 +13,7 @@
         {href: "#", text: "Serviços"},
         {href: "#", text: "Projetos"},
         {href: "#", text: "Contacto"},
-        {href: "#", text: "Produtos", icon: "bag"},
+        {href: "/products", text: "Produtos", icon: "bag"},
         {href: "#", text: "Favoritos", icon: "star"},
     ];
 
