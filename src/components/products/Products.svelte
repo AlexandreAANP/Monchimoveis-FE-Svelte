@@ -3,8 +3,7 @@
     import ListCategories from './listCategories.svelte';
     import ListProducts from './listProducts.svelte';
     const bgImageUrl = `${base}/images/background_main_images.jpg`;
-    let props = $props();
-    console.log(props.data);
+
 </script>
 <style>
 
@@ -31,18 +30,15 @@
 </style>
 
 
-<div id="products" class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background-image: {`url(${bgImageUrl})`}">
+<div id="products" class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background: {`url(${bgImageUrl})`} repeat center top;">
     <div class="mainDiv  flex flex-col items-center justify-center">
-        <div class="mainDiv2 flex flex-col items-center justify-center max-w-[1170px]">
+        <div class="mainDiv2 flex flex-col items-center justify-center">
             <div class="flex flex-row items-top justify-center gap-5">
                 <ListCategories/>
 
-                <ListProducts/>
+                <ListProducts />
             </div>
             
-            <div>
-                qwoijqwioejqwiojeio jioeqwioje ioqjwie ioqw
-            </div>
 
         </div>
 

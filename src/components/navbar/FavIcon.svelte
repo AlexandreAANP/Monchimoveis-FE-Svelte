@@ -1,15 +1,15 @@
-<svg
+<svg 
     stroke="currentColor"
     fill="currentColor"
     stroke-width="0"
-    viewBox="0 0 24 24"
+    viewBox="0 0 16 16"
     style="margin-bottom:5px"
     height="1em"
     width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-    >
-    <path
-        d="m12.672.668 3.059 6.197 6.838.993a.75.75 0 0 1 .416 1.28l-4.948 4.823 1.168 6.812a.75.75 0 0 1-1.088.79L12 18.347l-6.116 3.216a.75.75 0 0 1-1.088-.791l1.168-6.811-4.948-4.823a.749.749 0 0 1 .416-1.279l6.838-.994L11.327.668a.75.75 0 0 1 1.345 0Z"
-    >
+    xmlns="http://www.w3.org/2000/svg">
+    <path 
+        fill-rule="evenodd"
+        d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0m-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z">
     </path>
 </svg>
+

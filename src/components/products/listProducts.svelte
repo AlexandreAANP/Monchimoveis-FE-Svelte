@@ -1,35 +1,176 @@
 <script>
+
     // let products_data = undefined; 
     import { onMount } from "svelte";
-    const endpoint = "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/products";
-    let products_data = [];
-    let get_products_data = async () => {
-      const response = await fetch(endpoint);
-      const data = await response.json();
-      console.log("Fecth data: ", data);
+    import FavProductIcon from "./FavProductIcon.svelte";
+    import UnFavProduct from "./UnFavProduct.svelte";
+    const limit=12;
+    let offset = 0;
+    let search= "";
+    let order = "0";
+    let productsList = []
+    let lastUpdate = new Date();
+    let hasMoreProducts = true;
+    // const endpoint = "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/products";
+    const endpoint = `http://localhost:9898/api/v1/content/public/product?limit=${limit}`;
 
-      products_data = data;
+    async function fetchProducts() {
+		const response = await fetch(endpoint);
+
+		if (response.ok) {
+      const code = await response.json();
+      productsList = code.content.products;
+      return code;
+		} else {
+			throw new Error(users);
+		}
+	}
+  let getProducts = fetchProducts();
+
+  async function searchProdutcs(){
+    let searchEndpoint = `${endpoint}&search=${search}`
+    const response = await fetch(searchEndpoint);
+    const code = await response.json();
+    productsList = code.content.products
+    if(code.content.products.length == 0){
+      throw new Error("NotFound");
     }
-    onMount(get_products_data);
-    // let products_data = fetch("https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/products").then((response) => response.json());
+    return code;
+  }
 
-    const images_domain = "https://api.monchimoveis.pt/static/images/"
-    
+  function getOrderProduct(){
+    let orderValue= ""
+    switch(order){
+      case "0":
+        orderValue="id";
+        break;
+      case "1":
+        orderValue="price&order=asc";
+        break;
+      case "2":
+        orderValue="price&order=desc";
+        break;
+      case "3":
+        orderValue="title&order=asc";
+        break;
+      case "4":
+        orderValue="title&order=desc";
+        break;
+    }
+    return orderValue;
+  }
+
+  async function reorderProdutcs(){
+
+    let orderedEndpoint = `${endpoint}&search=${search ?? "e"}&order_by=${getOrderProduct()}`
+
+    const response = await fetch(orderedEndpoint);
+    const code = await response.json();
+    if(code.content.products.length == 0){
+      throw new Error("NotFound");
+    }
+    return code;
+  }
+  const images_domain = "https://api.monchimoveis.pt/static/images/"
+  
+  function isProductFav(productReference){
+    return window.localStorage.getItem(`favs.${productReference}`) != null;
+  }
+  async function favHandler(productReference){
+    console.log("handler")
+    if(isProductFav(productReference)){
+      unfavProduct(productReference);
+    }else {
+      favProduct(productReference);
+    }
+    lastUpdate = new Date();
+  }
+
+  async function favProduct(productReference){
+    window.localStorage.setItem(`favs.${productReference}`, true)
+  }
+
+  async function unfavProduct(productReference){
+    window.localStorage.removeItem(`favs.${productReference}`);
+  }
+
+  async function getMoreProducts(){
+    let searchEndpoint = `${endpoint}?`
+    searchEndpoint += search != "" ? `search${search}&` : "";
+    searchEndpoint += getOrderProduct() != "" ?  `order_by=${getOrderProduct()}&` : ""
+    searchEndpoint += `limit=${limit}&offset=${offset}`
+    const response = await fetch(searchEndpoint);
+    const code = await response.json();
+    if (code.content.products.length == 0){
+      return false;
+    }
+    productsList.push(...code.content.products);
+    console.log({content: {products: productsList}})
+    getProducts = {content: {products: productsList}}
+    return true;
+  }
+
 </script>
 
 
+<style>
+
+  .title {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #333;
+  }
+  .options {
+    padding-bottom:  15px;
+  }
+</style>
+
       
 
 
 
 
-<div class="font-sans p-4 mx-auto lg:max-w-6xl md:max-w-4xl">
-    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-6 sm:mb-10">Premium Threads</h2>
+<div class="font-sans p-4 mx-auto lg:w-6xl md:w-4xl">
+  <div class="flex flex-col">
+    <h4 class="title text-center">PRODUTOS</h4>
+    <div class="options flex flex-row justify-between">
+      <div class="flex flex-col">
+        <input id="search" class="lock w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6", placeholder="Procurar..." type="text" bind:value={search} on:keydown={(e) => {
+          if (e.key === "Enter") {
+            getProducts = searchProdutcs();
+          }
+        }}>
+      </div>
+        <div class="flex flex-col rounded-md bg-white">
+          <select class="w-full appearance-none rounded-md py-1.5 pr-7 pl-3 text-base text-gray-500 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6" bind:value={order} on:change={(e)=>{getProducts=reorderProdutcs()}}>
+            <option value="0" >Novidades</option>
+            <option value="1">Preço Ascendente</option>
+            <option value="2">Preço Descendente</option>
+            <option value="3">Nome Ascendente</option>
+            <option value="4">Nome Descendente</option>
+        </select>
+        </div>
+    </div>
+  </div>
+    
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
       
-      {#each products_data.products as product}
-        <div class="bg-white flex flex-col rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.01] transition-all">
+      <!-- <div class="w-full">
+        
+        <p>...waiting</p>
+      </div> -->
+      {#await getProducts}
+      <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4">
+        
+          <div class="flex items-center justify-center w-full h-40">
+            <div class="w-10 h-10 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+      </div>
+      {:then data}
+        {#each data.content.products as product}
+        <div class="bg-white flex flex-col rounded overflow-hidden shadow-md hover:scale-[1.01] transition-all">
           <div class="w-full">
             <img src="{images_domain}{product.main_image.location}{product.main_image.name}" alt="{product.title}"
               class="w-full object-cover object-top aspect-[230/307]" />
@@ -43,21 +184,63 @@
                 {#if product.price != 0}
                   <h6 class="text-sm sm:text-base font-bold text-gray-800">{product.price} €</h6>
                 {/if}
-                <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto" title="Wishlist">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16px" class="fill-gray-800 inline-block"
-                    viewBox="0 0 64 64">
-                    <path
-                      d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
-                      data-original="#000000"></path>
-                  </svg>
+                <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto" title="Wishlist" >
+                  <div  class="bg-gray-100 rounded-full cursor-pointer">
+                    <button class="cursor-pointer" style="height: 22px;" on:click={() => favHandler(`${product.title}-${product.id}`)} aria-label={isProductFav(`${product.title}-${product.id}`) ? "Adicionar aos favoritos": "Remover dos favoritos"}>
+                      {#if lastUpdate && isProductFav(`${product.title}-${product.id}`)}
+                      <FavProductIcon></FavProductIcon>
+
+                    {:else}
+                    <UnFavProduct width=9000 height=90000></UnFavProduct>
+                   
+                    {/if}
+                  </button>
+                  
+                    
+                  </div>
                 </div>
               </div>
             </div>
-            <button type="button" class="px-2 h-9 font-semibold w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white tracking-wide ml-auto outline-none border-none rounded">Add to cart</button>
+            <a class="cursor-pointer" href="/product?reference={product.title}-{product.id}">
+              <button class="cursor-pointer px-2 h-9 font-semibold w-full mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide ml-auto outline-none border-none rounded">Mais Informação</button>
+            </a>
           </div>
         </div>
-      {/each}
-
+        {/each}
+       
+       
       
+      {:catch error}
+        {#if error.message == "NotFound"}
+          <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4">
+          
+            <div class="flex flex-col items-center justify-center py-12 px-4 text-center text-gray-500">
+              <p class="text-lg font-semibold">Não foi encontrado nenhum produto</p>
+            </div>
+        </div>
+        {:else}
+        <p style="color: red">Failed to load products. Please try again later.</p>
+        {/if}
+        
+      {/await} 
+      
+       {#await hasMoreProducts }
+       <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4">
+        <div class="flex items-center justify-center w-full h-40">
+          <div class="w-10 h-10 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+       </div> 
+        
+        {:then hasMoreProductsData } 
+        {#if hasMoreProductsData}
+        <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4 flex flex-col justify-center items-center">
+          <button on:click={() => {
+              offset += limit;
+              hasMoreProducts = getMoreProducts();
+             }}
+            class="cursor-pointer px-2 h-9 font-semibold  mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide outline-none border-none rounded">Ver mais Resultados</button>
+        </div>
+        {/if}
+        {/await}
     </div>
   </div>
