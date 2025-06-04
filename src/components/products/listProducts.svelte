@@ -4,7 +4,7 @@
     import { onMount } from "svelte";
     import FavProductIcon from "./FavProductIcon.svelte";
     import UnFavProduct from "./UnFavProduct.svelte";
-    const limit=12;
+    let limit=12;
     let offset = 0;
     let search= "";
     let order = "0";
@@ -16,10 +16,11 @@
 
     async function fetchProducts() {
 		const response = await fetch(endpoint);
-
+    hasMoreProducts = true;
 		if (response.ok) {
       const code = await response.json();
       productsList = code.content.products;
+      offset = productsList.length
       return code;
 		} else {
 			throw new Error(users);
@@ -32,6 +33,8 @@
     const response = await fetch(searchEndpoint);
     const code = await response.json();
     productsList = code.content.products
+    offset = productsList.length;
+    hasMoreProducts = true;
     if(code.content.products.length == 0){
       throw new Error("NotFound");
     }
@@ -77,7 +80,6 @@
     return window.localStorage.getItem(`favs.${productReference}`) != null;
   }
   async function favHandler(productReference){
-    console.log("handler")
     if(isProductFav(productReference)){
       unfavProduct(productReference);
     }else {
@@ -98,15 +100,17 @@
     let searchEndpoint = `${endpoint}?`
     searchEndpoint += search != "" ? `search${search}&` : "";
     searchEndpoint += getOrderProduct() != "" ?  `order_by=${getOrderProduct()}&` : ""
-    searchEndpoint += `limit=${limit}&offset=${offset}`
+    searchEndpoint += `offset=${offset}`
     const response = await fetch(searchEndpoint);
     const code = await response.json();
+    
     if (code.content.products.length == 0){
+      offset = 0;
       return false;
     }
     productsList.push(...code.content.products);
-    console.log({content: {products: productsList}})
     getProducts = {content: {products: productsList}}
+    offset = productsList.length;
     return true;
   }
 
@@ -234,8 +238,7 @@
         {:then hasMoreProductsData } 
         {#if hasMoreProductsData}
         <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4 flex flex-col justify-center items-center">
-          <button on:click={() => {
-              offset += limit;
+          <button on:click={() => {              
               hasMoreProducts = getMoreProducts();
              }}
             class="cursor-pointer px-2 h-9 font-semibold  mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide outline-none border-none rounded">Ver mais Resultados</button>
