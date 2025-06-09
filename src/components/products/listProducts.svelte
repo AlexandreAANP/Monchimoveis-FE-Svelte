@@ -1,42 +1,78 @@
 <script>
-
-    // let products_data = undefined; 
     import { onMount } from "svelte";
     import FavProductIcon from "./FavProductIcon.svelte";
     import UnFavProduct from "./UnFavProduct.svelte";
-    let limit=12;
-    let offset = 0;
-    let search= "";
-    let order = "0";
-    let productsList = []
-    let lastUpdate = new Date();
-    let hasMoreProducts = true;
-    // const endpoint = "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/products";
-    const endpoint = `http://localhost:9898/api/v1/content/public/product?limit=${limit}`;
+    import { page } from '$app/stores';
+    import { get } from 'svelte/store';
+    import { replaceState } from "$app/navigation";
 
-    async function fetchProducts() {
-		const response = await fetch(endpoint);
+    let {actualCategory} = $props()
+    let search = $state($page.url.searchParams.get('search'));
+    let offset = $page.url.searchParams.get('offset');
+    let order_by = $page.url.searchParams.get('order_by');
+    let shouldRendered = true;
+    let limit=12;
+    let order = $state("0");
+    let productsList = []
+    let lastUpdate = $state(new Date());
+    let hasMoreProducts = $state(true);
+    // const endpoint = "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/products";
+    let endpoint = `http://localhost:9898/api/v1/content/public/product`;
+
+
+    async function fetchProducts(searchParams) {
+      searchParams.set("limit", limit);
+      let apiEndpoint = new URL(`${endpoint}?${searchParams.toString()}`);
+      
+		const response = await fetch(apiEndpoint);
     hasMoreProducts = true;
 		if (response.ok) {
       const code = await response.json();
       productsList = code.content.products;
       offset = productsList.length
+      hasMoreProducts = code.content.products.length == limit;
       return code;
 		} else {
 			throw new Error(users);
 		}
 	}
-  let getProducts = fetchProducts();
+  
+  let getProducts = $state(fetchProducts());
+
+  onMount(()=>{
+    $effect(() => {
+      let category = actualCategory;
+      const search = new URLSearchParams(window.location.search);
+      getProducts = fetchProducts(search);
+  });
+  })
+  
 
   async function searchProdutcs(){
-    let searchEndpoint = `${endpoint}&search=${search}`
-    const response = await fetch(searchEndpoint);
+    const current = get(page);
+    let searchParams = new URLSearchParams(window.location.search);
+
+    searchParams.set("search", search)
+    let callEndpoint = new URL(endpoint);
+    if(search){
+      callEndpoint.searchParams.set("search", search);
+    }else{
+      searchParams.delete("search")
+    }
+    if (actualCategory){
+      callEndpoint.searchParams.set("category",actualCategory)
+    }
+
+    replaceState(`${window.location.origin}${window.location.pathname}?${searchParams.toString()}`);
+
+
+    const response = await fetch(callEndpoint.toString());
     const code = await response.json();
     productsList = code.content.products
     offset = productsList.length;
     hasMoreProducts = true;
     if(code.content.products.length == 0){
-      throw new Error("NotFound");
+      hasMoreProducts = false;
     }
     return code;
   }
@@ -65,13 +101,22 @@
 
   async function reorderProdutcs(){
 
-    let orderedEndpoint = `${endpoint}&search=${search ?? "e"}&order_by=${getOrderProduct()}`
+    let searchParams = new URLSearchParams(window.location.search);
+    if(search){
+      searchParams.set("search",search)
+    }
+    searchParams.set("limit",limit)
+
+    let orderedEndpoint = `${endpoint}?${searchParams.toString()}&order_by=${getOrderProduct()} `
 
     const response = await fetch(orderedEndpoint);
     const code = await response.json();
     if(code.content.products.length == 0){
-      throw new Error("NotFound");
+      hasMoreProducts = false;
+      // throw new Error("NotFound");
     }
+    searchParams.delete("limit")
+    replaceState(`${window.location.origin}${window.location.pathname}?${searchParams.toString()}&order_by=${getOrderProduct()}`);
     return code;
   }
   const images_domain = "https://api.monchimoveis.pt/static/images/"
@@ -97,11 +142,18 @@
   }
 
   async function getMoreProducts(){
-    let searchEndpoint = `${endpoint}?`
-    searchEndpoint += search != "" ? `search${search}&` : "";
-    searchEndpoint += getOrderProduct() != "" ?  `order_by=${getOrderProduct()}&` : ""
-    searchEndpoint += `offset=${offset}`
-    const response = await fetch(searchEndpoint);
+    let callEndpoint = new URL(endpoint);
+    if(search){
+      callEndpoint.searchParams.set("search", search);
+    }
+    if(order_by){
+      callEndpoint.searchParams.set("order_by", order_by)
+    }else{
+      callEndpoint.searchParams.set("order_by", getOrderProduct())
+    }
+    callEndpoint.searchParams.set("offset", offset)
+
+    const response = await fetch(callEndpoint.toString());
     const code = await response.json();
     
     if (code.content.products.length == 0){
@@ -128,6 +180,12 @@
   .options {
     padding-bottom:  15px;
   }
+  @media( max-width: 768px){
+    .buttonText {
+      font-size: 10pt;
+  }
+  }
+  
 </style>
 
       
@@ -138,16 +196,17 @@
 <div class="font-sans p-4 mx-auto lg:w-6xl md:w-4xl">
   <div class="flex flex-col">
     <h4 class="title text-center">PRODUTOS</h4>
-    <div class="options flex flex-row justify-between">
-      <div class="flex flex-col">
-        <input id="search" class="lock w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6", placeholder="Procurar..." type="text" bind:value={search} on:keydown={(e) => {
+    <div class="options flex flex-col sm:flex-row justify-between">
+      <div class="my-2">
+        <input id="search" class="lock w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6", placeholder="Procurar..." type="text" onkeydown={async (e) => {
           if (e.key === "Enter") {
+            search = e.srcElement.value
             getProducts = searchProdutcs();
           }
         }}>
       </div>
-        <div class="flex flex-col rounded-md bg-white">
-          <select class="w-full appearance-none rounded-md py-1.5 pr-7 pl-3 text-base text-gray-500 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6" bind:value={order} on:change={(e)=>{getProducts=reorderProdutcs()}}>
+        <div class="my-2 rounded-md bg-white">
+          <select class="w-full appearance-none rounded-md py-1.5 pr-7 pl-3 text-base text-gray-500 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6" bind:value={order} onchange={(e)=>{getProducts=reorderProdutcs()}}>
             <option value="0" >Novidades</option>
             <option value="1">Preço Ascendente</option>
             <option value="2">Preço Descendente</option>
@@ -159,12 +218,7 @@
   </div>
     
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-      
-      <!-- <div class="w-full">
-        
-        <p>...waiting</p>
-      </div> -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-4">
       {#await getProducts}
       <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4">
         
@@ -173,48 +227,59 @@
           </div>
       </div>
       {:then data}
-        {#each data.content.products as product}
-        <div class="bg-white flex flex-col rounded overflow-hidden shadow-md hover:scale-[1.01] transition-all">
-          <div class="w-full">
-            <img src="{images_domain}{product.main_image.location}{product.main_image.name}" alt="{product.title}"
-              class="w-full object-cover object-top aspect-[230/307]" />
-          </div>
-          
+    
+        {#if data.content.products.length == 0}
+          <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4">
+            
+            <div class="flex flex-col items-center justify-center py-12 px-4 text-center text-gray-500">
+              <p class="text-lg font-semibold">Não foi encontrado nenhum produto</p>
+            </div>
+        </div>
+        {:else}
+          {#each data.content.products as product}
+          <div class="bg-white flex flex-col rounded overflow-hidden shadow-md hover:scale-[1.01] transition-all">
+            <div class="w-full">
+              <img src="{images_domain}{product.main_image.location}{product.main_image.name}" alt="{product.title}"
+                class="w-full object-cover object-top aspect-[230/307]" />
+            </div>
+            
 
-          <div class="p-4 flex-1 flex flex-col">
-            <div class="flex-1">
-              <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">{product.title}</h5>
-              <div class="mt-2 flex items-center flex-wrap gap-2">
-                {#if product.price != 0}
-                  <h6 class="text-sm sm:text-base font-bold text-gray-800">{product.price} €</h6>
-                {/if}
-                <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto" title="Wishlist" >
-                  <div  class="bg-gray-100 rounded-full cursor-pointer">
-                    <button class="cursor-pointer" style="height: 22px;" on:click={() => favHandler(`${product.title}-${product.id}`)} aria-label={isProductFav(`${product.title}-${product.id}`) ? "Adicionar aos favoritos": "Remover dos favoritos"}>
-                      {#if lastUpdate && isProductFav(`${product.title}-${product.id}`)}
-                      <FavProductIcon></FavProductIcon>
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex-1">
+                <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">{product.title}</h5>
+                <div class="mt-2 flex items-center flex-wrap gap-2">
+                  {#if product.price != 0}
+                    <h6 class="text-sm sm:text-base font-bold text-gray-800">{product.price} €</h6>
+                  {/if}
+                  <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto" title="Wishlist" >
+                    <div  class="bg-gray-100 rounded-full cursor-pointer">
+                      <button class="cursor-pointer" style="height: 22px;" onclick={() => favHandler(`${product.title}-${product.id}`)} aria-label={isProductFav(`${product.title}-${product.id}`) ? "Adicionar aos favoritos": "Remover dos favoritos"}>
+                        {#if lastUpdate && isProductFav(`${product.title}-${product.id}`)}
+                        <FavProductIcon></FavProductIcon>
 
-                    {:else}
-                    <UnFavProduct width=9000 height=90000></UnFavProduct>
-                   
-                    {/if}
-                  </button>
-                  
+                      {:else}
+                      <UnFavProduct width=9000 height=90000></UnFavProduct>
                     
+                      {/if}
+                    </button>
+                    
+                      
+                    </div>
                   </div>
                 </div>
               </div>
+              <a class="cursor-pointer" href="/product?reference={product.title}-{product.id}">
+                <button class="buttonText cursor-pointer px-2 h-9 font-semibold w-full mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide ml-auto outline-none border-none rounded">Mais Informação</button>
+              </a>
             </div>
-            <a class="cursor-pointer" href="/product?reference={product.title}-{product.id}">
-              <button class="cursor-pointer px-2 h-9 font-semibold w-full mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide ml-auto outline-none border-none rounded">Mais Informação</button>
-            </a>
           </div>
-        </div>
-        {/each}
+          {/each}
+        {/if}
        
        
       
       {:catch error}
+
         {#if error.message == "NotFound"}
           <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4">
           
@@ -238,7 +303,7 @@
         {:then hasMoreProductsData } 
         {#if hasMoreProductsData}
         <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4 flex flex-col justify-center items-center">
-          <button on:click={() => {              
+          <button onclick={() => {              
               hasMoreProducts = getMoreProducts();
              }}
             class="cursor-pointer px-2 h-9 font-semibold  mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide outline-none border-none rounded">Ver mais Resultados</button>

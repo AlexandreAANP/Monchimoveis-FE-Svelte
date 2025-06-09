@@ -1,9 +1,44 @@
 <script>
     import { base } from '$app/paths';
+    import { onMount } from 'svelte';
     import ListCategories from './listCategories.svelte';
-    import ListProducts from './listProducts.svelte';
-    const bgImageUrl = `${base}/images/background_main_images.jpg`;
 
+    import ListCategoriesMobile from './listCategoriesMobile.svelte';
+    import ListProducts from './listProducts.svelte';
+    import { replaceState } from '$app/navigation';
+    import { page } from '$app/stores';
+    import { get } from 'svelte/store';
+
+    const bgImageUrl = `${base}/images/background_main_images.jpg`;
+    let width = 0;
+    let actualCategory = new URLSearchParams(get(page).url.search).get("category");
+
+    function changeCategory(category){
+        actualCategory = category
+        const search = new URLSearchParams(window.location.search);
+        if (category) {
+        search.set('category', category);
+        } else {
+        search.delete('category');
+        }
+
+        const query = search.toString();
+        const newUrl = `${window.location.origin}${window.location.pathname}${query ? `?${query}` : ''}`;
+        replaceState(newUrl);
+    }
+
+    const updateWidth = () => {
+        width = window.innerWidth;
+    };
+    
+
+    // Listen for resize events
+    onMount(() => {
+        
+        updateWidth();
+        window.addEventListener('resize', updateWidth);
+        return () => window.removeEventListener('resize', updateWidth);
+    });
 </script>
 <style>
 
@@ -30,13 +65,19 @@
 </style>
 
 
-<div id="products" class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background: {`url(${bgImageUrl})`} repeat center top;">
+<div id="products" class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background: {`url(${bgImageUrl})`} repeat center top; background-size: contain;">
     <div class="mainDiv  flex flex-col items-center justify-center">
         <div class="mainDiv2 flex flex-col items-center justify-center">
+            {#if width < 1023}
+            <ListCategoriesMobile changeCategory ={changeCategory} actualCategory={actualCategory}/>
+            {/if}
             <div class="flex flex-row items-top justify-center gap-5">
-                <ListCategories/>
+                {#if width > 1023 }
+                <ListCategories changeCategory ={changeCategory} actualCategory={actualCategory}/>
+                {/if}
 
-                <ListProducts />
+                <ListProducts actualCategory={actualCategory} />
+
             </div>
             
 
