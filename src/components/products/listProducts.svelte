@@ -5,6 +5,10 @@
     import { page } from '$app/stores';
     import { get } from 'svelte/store';
     import { replaceState } from "$app/navigation";
+    import { FavHandler } from "../../utils/fav-handler.utils.svelte";
+    import FavMessage from "./ShowMessage.svelte";
+    const images_domain = "https://api.monchimoveis.pt/static/images/"
+    const favHandler = new FavHandler();
 
     let {actualCategory} = $props()
     let search = $state($page.url.searchParams.get('search'));
@@ -119,27 +123,6 @@
     replaceState(`${window.location.origin}${window.location.pathname}?${searchParams.toString()}&order_by=${getOrderProduct()}`);
     return code;
   }
-  const images_domain = "https://api.monchimoveis.pt/static/images/"
-  
-  function isProductFav(productReference){
-    return window.localStorage.getItem(`favs.${productReference}`) != null;
-  }
-  async function favHandler(productReference){
-    if(isProductFav(productReference)){
-      unfavProduct(productReference);
-    }else {
-      favProduct(productReference);
-    }
-    lastUpdate = new Date();
-  }
-
-  async function favProduct(productReference){
-    window.localStorage.setItem(`favs.${productReference}`, true)
-  }
-
-  async function unfavProduct(productReference){
-    window.localStorage.removeItem(`favs.${productReference}`);
-  }
 
   async function getMoreProducts(){
     let callEndpoint = new URL(endpoint);
@@ -253,12 +236,11 @@
                   {/if}
                   <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto" title="Wishlist" >
                     <div  class="bg-gray-100 rounded-full cursor-pointer">
-                      <button class="cursor-pointer" style="height: 22px;" onclick={() => favHandler(`${product.title}-${product.id}`)} aria-label={isProductFav(`${product.title}-${product.id}`) ? "Adicionar aos favoritos": "Remover dos favoritos"}>
-                        {#if lastUpdate && isProductFav(`${product.title}-${product.id}`)}
+                      <button class="cursor-pointer" style="height: 22px;" onclick={() => favHandler.favHandler(`${product.title}-${product.id}`)} aria-label={favHandler.isProductFav(`${product.title}-${product.id}`) ? "Adicionar aos favoritos": "Remover dos favoritos"}>
+                        {#if favHandler.lastUpdate && favHandler.isProductFav(`${product.title}-${product.id}`)}
                         <FavProductIcon></FavProductIcon>
-
                       {:else}
-                      <UnFavProduct width=9000 height=90000></UnFavProduct>
+                        <UnFavProduct width=9000 height=90000></UnFavProduct>
                     
                       {/if}
                     </button>
@@ -312,3 +294,4 @@
         {/await}
     </div>
   </div>
+  <FavMessage message = {favHandler.favMessage}/>
