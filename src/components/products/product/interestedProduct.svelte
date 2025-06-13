@@ -128,7 +128,7 @@
 <div 
     in:slide={{ y: 200, duration: 700 }}
     out:slide={{ y: 200, duration: 700 }}
-    class={`w-[300px] w-md-[400px] bg-gray-100 rounded-lg fixed right-[5vw] bottom-0  p-4`}>
+    class={`w-[300px] md:w-[400px] bg-gray-100 rounded-lg fixed right-[5vw] bottom-0  p-4`}>
     <div>
         
       <h4 id="product_name" class="text-lg font-semibold">{productTitle}</h4>
