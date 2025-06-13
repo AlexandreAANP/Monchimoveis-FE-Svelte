@@ -117,7 +117,7 @@
         }
   }
 </style>
-<div class="bg-white/90 p-5 pt-10 mt-24 shadow-md rounded-lg max-w-6xl mx-auto w-full">
+<div class="bg-white/90 p-5 pt-10 mt-10 shadow-md rounded-lg max-w-6xl mx-auto w-full">
     <div class="flex flex-col md:flex-row gap-6">
       
         <h2 class="show-mobile text-center text-2xl font-semibold text-gray-800">{product.title}</h2>

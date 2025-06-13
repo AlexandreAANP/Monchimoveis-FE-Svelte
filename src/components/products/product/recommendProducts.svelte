@@ -1,195 +1,93 @@
-<div style="background-color: rgba(255,255,255,0.5)">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-8 col-sm-10 col-md-10">
-                <h3 style="color: white;">Mais gostados da mesma categoria</h3>
+<script>
+    import FavProductIcon from "../FavProductIcon.svelte";
+    import UnFavProduct from "../UnFavProduct.svelte";
+    import FavMessage from "../ShowMessage.svelte"
+    import { FavHandler } from "../../../utils/fav-handler.utils.svelte";
+    const favHandler = new FavHandler();
+    const {categoryReference} = $props();
+    const images_domain = "https://api.monchimoveis.pt/static/images/"
+    const apiEndpoint = "http://127.0.0.1:9898/api/v1/content/public/product?limit=4&category=";
+    let categoryName = categoryReference.split("-");
+    categoryName = categoryName.slice(0,categoryName.length-1)
+    categoryName = categoryName.join("-")
+    async function getProducts(){
+        const response = await fetch(`${apiEndpoint}${categoryReference}`)
+        if (response.ok) return response.json()
+        return null
+    }
+
+    const products = getProducts();
+
+</script>
+
+<style>
+   @media( max-width: 768px){
+    .buttonText {
+      font-size: 10pt;
+  }
+  }
+</style>
+{#await products}
+   <div></div> 
+{:then data} 
+{#if data}
+<div class="bg-white/90 mt-5 pb-5 rounded w-full ">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <h3 class="text-gray-800 text-xl font-semibold">
+            Produtos relacionados na categoria: <a href="/products?category={categoryReference}" class="text-[#a7c44c] text-lg hover:underline"><span class="font-bold">{categoryName}</span></a>
+          </h3>
+      </div>
+  
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5">
+        <!-- Product Card -->
+         {#each data.content.products as product }
+            
+         
+        <div class="bg-white flex flex-col rounded overflow-hidden shadow-md hover:scale-[1.01] transition-all">
+            <div class="w-full">
+              <img src="{images_domain}{product.main_image.location}{product.main_image.name}" alt="{product.title}"
+                class="w-[200] w-md-full object-cover object-top aspect-[230/307]" />
             </div>
             
-        </div>
+
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex-1">
+                <h5 class="text-sm sm:text-base font-bold text-gray-800 line-clamp-2">{product.title}</h5>
+                <div class="mt-2 flex items-center flex-wrap gap-2">
+                  {#if product.price != 0}
+                    <h6 class="text-sm sm:text-base font-bold text-gray-800">{product.price} €</h6>
+                  {/if}
+                  <div class="bg-gray-100 w-8 h-8 flex items-center justify-center rounded-full cursor-pointer ml-auto" title="Wishlist" >
+                    <div  class="bg-gray-100 rounded-full cursor-pointer">
+                      <button class="cursor-pointer" style="height: 22px;" onclick={() => favHandler.favHandler(`${product.title}-${product.id}`)} aria-label={favHandler.isProductFav(`${product.title}-${product.id}`) ? "Adicionar aos favoritos": "Remover dos favoritos"}>
+                        {#if favHandler.lastUpdate && favHandler.isProductFav(`${product.title}-${product.id}`)}
+                        <FavProductIcon></FavProductIcon>
+                      {:else}
+                        <UnFavProduct></UnFavProduct>
+                    
+                      {/if}
+                    </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="cursor-pointer" href="/product?reference={product.title}-{product.id}">
+                <button class="buttonText cursor-pointer px-2 h-9 font-semibold w-full mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide ml-auto outline-none border-none rounded">Mais Informação</button>
+              </a>
+            </div>
+          </div>
+          {/each}
+
+      </div>
+      <div class="flex flex-col justify-center items-center">
+      <a href="/products?category={categoryReference}"  class="mt-4 px-5 py-2 cursor-pointer bg-green-600 hover:bg-green-700 text-white font-medium rounded">
+        Ver mais
+      </a>
     </div>
-
-    <style>
-        .comment {
-              text-align: justify;
-              width: 90%;
-              height: 82px;
-              line-height: 20px;
-              word-break: break-all;
-              /*background-color: skyblue;*/
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -moz-box-orient: vertical;
-              -ms-box-orient: vertical;
-              box-orient: vertical;
-              -webkit-line-clamp: 5;
-              -moz-line-clamp: 5;
-              -ms-line-clamp: 5;
-              line-clamp: 5;
-              overflow: hidden;
-            }
-        .thumbnail:hover{
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-    </style>
-    <div class="container-fluid mt-5">
-        <div class="row" id="listProducts">
-            
-            
-            <a class="product" href="/product?reference=Mesa de sala (tipo secretária) / living table (des-22">
-                <div class="itemProduct col-xs-6 col-sm-4 col-md-3" style="cursor: pointer; display: block;">
-                    <div id="thumbnail" class="thumbnail">
-                        <img id="thumb_img" src="https://api.monchimoveis.pt/static/images/product.22/images/image-4387b965-5302-464e-997f-800ce2ef766c.jpg" alt="Mesa de sala (tipo secretária) / living table (des" style="height:150px;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-center">Mesa de sala (tipo secretária) / living table (des</h3>
-                            </div>
-                            <div class="col-md-12" align="center">
-                                <div class="comment" style="">
-                                    Madeira de freixo. / ash wood.
-Dimensões:  Comp. 95cm x Larg. 80cm x Alt. 80cm.
-Refª n. 16
-                                </div>
-                            </div>
-                            
-                            <div class="col-sm-12 row">
-                                <div class="col-sm-4" align="center">
-                                    
-                                </div>
-                                <div class="col-sm-8" align="right">
-                                    <b style="color: black;">0</b>
-                                    <i id="like" class="bi bi-heart-fill text-danger" style="vertical-align: middle;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
-                </div>
-            </a>
-            
-            <a class="product" href="/product?reference=Mesa/table-6">
-                <div class="itemProduct col-xs-6 col-sm-4 col-md-3" style="cursor: pointer; display: block;">
-                    <div id="thumbnail" class="thumbnail">
-                        <img id="thumb_img" src="https://api.monchimoveis.pt/static/images/product.6/images/image-18b2bd99-4241-4189-a5c6-b3a108895ff1.jpg" alt="Mesa/table" style="height:150px;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-center">Mesa/table</h3>
-                            </div>
-                            <div class="col-md-12" align="center">
-                                <div class="comment" style="">
-                                    Madeira de Castanho/ Chestnut Wood.
-Dimensões; comp. 2.60mx Larg. 1.00mx Alt. 80cmx espes. 7cm. 
-Sem acabamento./unfinished.
-Refª01
-
-                                </div>
-                            </div>
-                            
-                            <div class="col-sm-12 row">
-                                <div class="col-sm-4" align="center">
-                                    
-                                </div>
-                                <div class="col-sm-8" align="right">
-                                    <b style="color: black;">0</b>
-                                    <i id="like" class="bi bi-heart-fill text-danger" style="vertical-align: middle;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
-                </div>
-            </a>
-            
-            <a class="product" href="/product?reference=Mesa sala /living table-28">
-                <div class="itemProduct col-xs-6 col-sm-4 col-md-3" style="cursor: pointer; display: block;">
-                    <div id="thumbnail" class="thumbnail">
-                        <img id="thumb_img" src="https://api.monchimoveis.pt/static/images/product.28/images/image-7ba126a2-8485-4a98-8482-c615e32cbb39.jpg" alt="Mesa sala /living table" style="height:150px;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-center">Mesa sala /living table</h3>
-                            </div>
-                            <div class="col-md-12" align="center">
-                                <div class="comment" style="">
-                                    Madeira de oliveira / olive wood.
-Dimensões: Comp. 85cm x Larg. 48cm x Alt. 45cm.
-Refª. 22
-                                </div>
-                            </div>
-                            
-                            <div class="col-sm-12 row">
-                                <div class="col-sm-4" align="center">
-                                    
-                                </div>
-                                <div class="col-sm-8" align="right">
-                                    <b style="color: black;">0</b>
-                                    <i id="like" class="bi bi-heart-fill text-danger" style="vertical-align: middle;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
-                </div>
-            </a>
-            
-            <a class="product" href="/product?reference=Mesa de Jantar /dining table-7">
-                <div class="itemProduct col-xs-6 col-sm-4 col-md-3" style="cursor: pointer; display: block;">
-                    <div id="thumbnail" class="thumbnail">
-                        <img id="thumb_img" src="https://api.monchimoveis.pt/static/images/product.7/images/image-cdb74339-093a-4c8a-87bc-3310fed4856e.jpg" alt="Mesa de Jantar /dining table" style="height:150px;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-center">Mesa de Jantar /dining table</h3>
-                            </div>
-                            <div class="col-md-12" align="center">
-                                <div class="comment" style="">
-                                    Madeira de Castanho/ Chestnut wood
-Dimensões: Comp 2.20mx Larg. 90cmx Alt. 80cmx4 cm espes. do tampo.
-Sem acabamento / unfinished.
-Refª 02
-
-
-                                </div>
-                            </div>
-                            
-                            <div class="col-sm-12 row">
-                                <div class="col-sm-4" align="center">
-                                    
-                                </div>
-                                <div class="col-sm-8" align="right">
-                                    <b style="color: black;">0</b>
-                                    <i id="like" class="bi bi-heart-fill text-danger" style="vertical-align: middle;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
-                </div>
-            </a>
-            
-            <!-- <script>
-                function displayVisibleItemsJS(number){
-                    i = 0
-                    Array.from(document.getElementsByClassName("itemProduct")).forEach(function(e){
-                        if(i>=number){
-                            e.style.display="none"
-                        }
-                        else{
-                            e.style.display="block"
-                        }
-                        i++
-                    })
-                }
-                $(window).on("resize", function(){
-                    if(window.innerWidth < 768){
-                        displayVisibleItemsJS(2)  
-                    }
-                    else if(window.innerWidth < 992){
-                        displayVisibleItemsJS(3)
-                    }
-                    else{
-                        displayVisibleItemsJS(4)
-                    }
-                });
-                
-            </script> -->
-        </div>
     </div>
-</div>
+    
+  </div>
+{/if}
+{/await}
+<FavMessage message = {favHandler.favMessage}/>

@@ -6,7 +6,7 @@
     import { get } from 'svelte/store';
     import { replaceState } from "$app/navigation";
     import { FavHandler } from "../../utils/fav-handler.utils.svelte";
-    import FavMessage from "./ShowMessage.svelte";
+    import ShowMessage from "./ShowMessage.svelte";
     const images_domain = "https://api.monchimoveis.pt/static/images/"
     const favHandler = new FavHandler();
 
@@ -176,7 +176,7 @@
 
 
 
-<div class="font-sans p-4 mx-auto lg:w-6xl md:w-4xl">
+<div class="font-sans p-4 mx-auto">
   <div class="flex flex-col">
     <h4 class="title text-center">PRODUTOS</h4>
     <div class="options flex flex-col sm:flex-row justify-between">
@@ -201,7 +201,7 @@
   </div>
     
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-4">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-4">
       {#await getProducts}
       <div class="col-span-2 sm:col-span-3 lg:col-span-4 p-4">
         
@@ -250,7 +250,7 @@
                   </div>
                 </div>
               </div>
-              <a class="cursor-pointer" href="/product?reference={product.title}-{product.id}">
+              <a class="cursor-pointer" href="/product?reference={product.title}-{product.id}"  target="_blank">
                 <button class="buttonText cursor-pointer px-2 h-9 font-semibold w-full mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide ml-auto outline-none border-none rounded">Mais Informação</button>
               </a>
             </div>
@@ -294,4 +294,4 @@
         {/await}
     </div>
   </div>
-  <FavMessage message = {favHandler.favMessage}/>
+  <ShowMessage message = {favHandler.favMessage}/>

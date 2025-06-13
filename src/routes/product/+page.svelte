@@ -58,9 +58,10 @@
           </div>
         {:then data}
             <ViewProduct product={data.content} imagesPath={imagesPath}></ViewProduct>
+            <RecommendProducts categoryReference={`${data.content.category.name}-${data.content.category.id}`}></RecommendProducts>
         {:catch error}
         NOT FOUND
         {/await}    
-        <RecommendProducts></RecommendProducts>
+        
     </div>
 </div>
