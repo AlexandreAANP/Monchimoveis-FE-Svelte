@@ -32,7 +32,6 @@
     async function switchImage(imageToSwitch){
         let imgToSwitch = images.find((img) => img.imagePath == imageToSwitch.imagePath);
         if(!imgToSwitch){
-            console.log("Not found any image")
             return;
         }
 

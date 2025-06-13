@@ -4,6 +4,7 @@
     import { get } from 'svelte/store';
     import { base } from '$app/paths';
     import RecommendProducts from "../../components/products/product/recommendProducts.svelte";
+    import NotFoundProduct from "../../components/products/product/NotFoundProduct.svelte";
     const product_reference =  new URLSearchParams(get(page).url.search).get("reference");
     const apiEndpoint = "http://localhost:9898/api/v1/content/public/product"
     const imagesPath = "https://api.monchimoveis.pt/static/images/"
@@ -60,7 +61,7 @@
             <ViewProduct product={data.content} imagesPath={imagesPath}></ViewProduct>
             <RecommendProducts categoryReference={`${data.content.category.name}-${data.content.category.id}`}></RecommendProducts>
         {:catch error}
-        NOT FOUND
+        <NotFoundProduct productReference= {product_reference}/>
         {/await}    
         
     </div>
