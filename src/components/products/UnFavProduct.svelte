@@ -1,4 +1,7 @@
-<svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#31b800" stroke="#31b800">
+<script>
+  const {classStyle} = $props()
+</script>
+<svg class="{classStyle}" version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve" fill="#31b800" stroke="#31b800">
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="4.224"></g>
     <g id="SVGRepo_iconCarrier"> <g>

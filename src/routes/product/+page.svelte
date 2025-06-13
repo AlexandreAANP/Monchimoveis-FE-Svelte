@@ -61,7 +61,7 @@
             <ViewProduct product={data.content} imagesPath={imagesPath}></ViewProduct>
             <RecommendProducts categoryReference={`${data.content.category.name}-${data.content.category.id}`}></RecommendProducts>
         {:catch error}
-        <NotFoundProduct productReference= {product_reference}/>
+            <NotFoundProduct productReference= {product_reference}/>
         {/await}    
         
     </div>
