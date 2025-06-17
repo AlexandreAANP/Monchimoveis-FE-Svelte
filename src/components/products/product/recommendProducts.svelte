@@ -1,6 +1,6 @@
 <script>
-    import FavProductIcon from "../FavProductIcon.svelte";
-    import UnFavProduct from "../UnFavProduct.svelte";
+    import FavProductIcon from "../icons/FavProductIcon.svelte";
+    import UnFavProduct from "../icons/UnFavProductIcon.svelte";
     import FavMessage from "../ShowMessage.svelte"
     import { FavHandler } from "../../../utils/fav-handler.utils.svelte";
     const favHandler = new FavHandler();

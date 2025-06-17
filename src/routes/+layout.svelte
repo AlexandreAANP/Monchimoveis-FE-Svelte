@@ -2,6 +2,7 @@
 	import '../app.css';
 	import Navbar from '../components/navbar/Navbar.svelte';
 	import Footer from '../components/footer/Footer.svelte';
+	import config from '$lib/config.js';
 	let { children } = $props();
 </script>
 
@@ -12,8 +13,8 @@
 	}
 </style>
 
-<Navbar />
+<Navbar config = {config.navbar}/>
 
 {@render children()}
 
-<Footer />
+<Footer config={config.footer} />

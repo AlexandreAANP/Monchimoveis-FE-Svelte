@@ -1,7 +1,7 @@
 <script>
-    import UnFavProduct from "../products/UnFavProduct.svelte"
-    import FavProductIcon from "../products/FavProductIcon.svelte";
-    import ContactIcon from "../products/ContactIcon.svelte";
+    import UnFavProduct from "../products/icons/UnFavProductIcon.svelte"
+    import FavProductIcon from "../products/icons/FavProductIcon.svelte";
+    import ContactIcon from "../products/icons/ContactIcon.svelte";
     import { FavHandler } from "../../utils/fav-handler.utils.svelte";
     import InterestedProduct from "../products/product/interestedProduct.svelte";
     const favHandler = new FavHandler()

@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
-    import FavProductIcon from "./FavProductIcon.svelte";
-    import UnFavProduct from "./UnFavProduct.svelte";
+    import FavProductIcon from "./icons/FavProductIcon.svelte";
+    import UnFavProduct from "./icons/UnFavProductIcon.svelte";
     import { page } from '$app/stores';
     import { get } from 'svelte/store';
     import { replaceState } from "$app/navigation";
@@ -12,9 +12,9 @@
 
     let {actualCategory} = $props()
     let search = $state($page.url.searchParams.get('search'));
-    let offset = $page.url.searchParams.get('offset');
-    let order_by = $page.url.searchParams.get('order_by');
-    let shouldRendered = true;
+    let offset = $state($page.url.searchParams.get('offset'));
+    let order_by = $state($page.url.searchParams.get('order_by'));
+    let shouldRendered =$state(true);
     let limit=12;
     let order = $state("0");
     let productsList = []
@@ -28,27 +28,27 @@
       searchParams.set("limit", limit);
       let apiEndpoint = new URL(`${endpoint}?${searchParams.toString()}`);
       
-		const response = await fetch(apiEndpoint);
-    hasMoreProducts = true;
-		if (response.ok) {
-      const code = await response.json();
-      productsList = code.content.products;
-      offset = productsList.length
-      hasMoreProducts = code.content.products.length == limit;
-      return code;
-		} else {
-			throw new Error(users);
-		}
+      const response = await fetch(apiEndpoint);
+      hasMoreProducts = true;
+      if (response.ok) {
+        const code = await response.json();
+        productsList = code.content.products;
+        offset = productsList.length
+        hasMoreProducts = code.content.products.length == limit;
+        return code;
+      } else {
+        throw new Error(users);
+      }
 	}
   
   let getProducts = $state(fetchProducts());
 
   onMount(()=>{
-    $effect(() => {
-      let category = actualCategory;
-      const search = new URLSearchParams(window.location.search);
-      getProducts = fetchProducts(search);
-  });
+      $effect(() => {
+        let category = actualCategory;
+        const search = new URLSearchParams(window.location.search);
+        getProducts = fetchProducts(search);
+    });
   })
   
 

@@ -2,8 +2,8 @@
     import { onMount } from "svelte";
     import CloseNavBarIcon from "../navbar/CloseNavBarIcon.svelte";
     import OpenNavBarIcon from "../navbar/OpenNavBarIcon.svelte";
-    import OpenCategoriesIcon from "./OpenCategoriesIcon.svelte";
-    import CloseCategoriesIcon from "./CloseCategoriesIcon.svelte";
+    import OpenCategoriesIcon from "./icons/OpenCategoriesIcon.svelte";
+    import CloseCategoriesIcon from "./icons/CloseCategoriesIcon.svelte";
     import { slide } from 'svelte/transition';
     const endpoint = `http://localhost:9898/api/v1/content/public/category`
   

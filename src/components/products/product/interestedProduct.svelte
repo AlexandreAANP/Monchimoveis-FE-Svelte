@@ -1,7 +1,7 @@
 <script>
     import { slide } from "svelte/transition";
-    import SendIcon from "../SendIcon.svelte";
-    import CancelIcon from "../CancelIcon.svelte";
+    import SendIcon from "../icons/SendIcon.svelte";
+    import CancelIcon from "../icons/CancelIcon.svelte";
     import ShowMessage from "../ShowMessage.svelte";
     import {blockProduct, loadProductMessage} from "../../../utils/block-product.utils.svelte"
     import ShowWarningMessage from "../ShowWarningMessage.svelte";

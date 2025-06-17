@@ -1,8 +1,7 @@
-<script lang="ts">
+<script>
     import AboutText from "./AboutText.svelte";
-    let title: string = "A nossa História";
-
-    let urlVideo: string = "https://www.youtube.com/embed/WyufinWKOUQ?si=FlvkoVI6Xu9uHmIY";
+    const {config} = $props();
+    console.log(config)
 </script>
 <style>
     #about {
@@ -53,13 +52,13 @@
 
 <div id="about" >
         <div class="sectioTitle text-center center">
-            <h2 class="h2Title">{title}</h2>
+            <h2 class="h2Title">{config.title}</h2>
             <hr class="hrTitle" />
 
             <div class="flex flex-col items-center">
                 <iframe
                     class="w-3/4 h-64 md:w-1/2 md:h-96 shadow-gray-400 shadow-xl"
-                    src={urlVideo}
+                    src={config.url_video}
                     title="Monchimoveis"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -68,7 +67,7 @@
                 >
                 </iframe>
             </div>
-            <AboutText></AboutText>
+            <AboutText config={config.content}></AboutText>
         </div>
     
 </div>

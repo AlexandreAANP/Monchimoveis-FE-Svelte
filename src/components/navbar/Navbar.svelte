@@ -1,25 +1,14 @@
 
-<script lang="ts">
-    import type { ItemProps } from './Item.svelte';
+<script>
     import { cubicOut } from 'svelte/easing';
     import { slide } from 'svelte/transition';
     import Items from './Items.svelte';
     import { onMount } from "svelte";
     import CloseNavBarIcon from './CloseNavBarIcon.svelte';
     import OpenNavBarIcon from './OpenNavBarIcon.svelte';
-
-    let isOnTop = true;
-    let openNav = false;
-    let items :ItemProps[] = [
-        {href: "/#about", text: "Nós"},
-        {href: "#", text: "Serviços"},
-        {href: "#", text: "Projetos"},
-        {href: "#", text: "Contacto"},
-        {href: "/products", text: "Produtos", icon: "bag"},
-        {href: "#", text: "Favoritos", icon: "star"},
-    ];
-
-    let title = "Monchimóveis";
+    const {config} = $props();
+    let isOnTop = $state(true);
+    let openNav = $state(false);
 
     
 
@@ -37,7 +26,7 @@
         });
     });
 
-    function setOpenNav(value: boolean) {
+    function setOpenNav(value) {
         openNav = value;
     }	
    
@@ -82,12 +71,12 @@
 >
     <div class="container mx-auto flex items-center justify-between text-blue-gray-900">
     
-        <a href="./" class="mr-4 cursor-pointer navtitle" >{title}</a>
+        <a href="./" class="mr-4 cursor-pointer navtitle" >{config.title}</a>
     
 
     <div class="hidden lg:block xl:block">
         <ul class="mt-2 mb-4 flex gap-2 flex-col lg:mb-0 lg:mt-0 lg:flex-row lg:items-right" >
-            <Items items={items}/>
+            <Items items={config.items}/>
         </ul>
         <!-- <Items items={items}/> -->
     </div>
@@ -112,7 +101,7 @@
         
             <hr>
             <ul class="mt-2 mb-4 flex gap-2 flex-col lg:mb-0 lg:mt-0 lg:flex-row lg:items-right" >
-                <Items items={items}/>
+                <Items items={config.items}/>
             </ul>
     </div>
     {/if}

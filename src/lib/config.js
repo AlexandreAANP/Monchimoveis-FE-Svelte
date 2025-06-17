@@ -1,0 +1,93 @@
+import { base } from '$app/paths';
+export default {
+    "navbar": {
+        "title": "Monchimóveis",
+        "items": [
+            {href: "/#about", text: "Nós"},
+            {href: "#", text: "Serviços"},
+            {href: "#", text: "Projetos"},
+            {href: "#", text: "Contacto"},
+            {href: "/products", text: "Produtos", icon: "bag"},
+            {href: "#", text: "Favoritos", icon: "star"},
+        ]
+    },
+    "footer":{
+        "facebook_url": "https://www.facebook.com/profile.php?id=61551917374580&locale=pt_PT",
+        "instagram_url": "https://www.instagram.com/josegilvarela/"
+    },
+    "main_page":{
+        "home":{
+            "title": "MonchiMóveis",
+            "backgroundImage": `${base}/images/background_main_images.jpg`,
+            "subtitle": "Móveis Rústicos de Madeira Natural",
+            "button": {
+                "href":"#about",
+                "content": "SABER MAIS"
+            }
+        },
+        "about":{
+            "title": "A nossa História",
+            "url_video" : "https://www.youtube.com/embed/WyufinWKOUQ?si=FlvkoVI6Xu9uHmIY",
+            "content":{
+                "en": { 
+                    "subtitle": "NATURAL WOOD FURNITURE",
+                    "text": "There is nothing that compares to the natural wood furniture. All furnishings are handcrafted in Monchique manufactured of solid wood in a variety of species from the mountains of Monchique in the Algarve. The line between rustic furniture and the natural shape of the wood intersects in a perfect symbiosis between the natural bases which fit perfectly in a contemporary setting. You can enjoy natural furniture unique design in your home, knowing that all wooden furniture are crafted from sustainable wood a renewable resource, where for every tree harvest other trees will be planted. Each piece of furniture has naturally its own character so you wont find two pieces alike."
+                },
+                "pt": {
+                     "subtitle": "MÓVEIS ARTESANAIS",
+                      "text": "Não há nada que se compare ao mobiliário natural. Todos os móveis são artesanais, fabricados em Monchique de madeira maciça das mais variadas espécies oriundas da serra de Monchique no Algarve. A linha entre móveis rústicos e a forma natural da madeira cruzam-se numa simbiose perfeita entre as peças naturais com bases modernas, que se enquadram perfeitamente num ambiente contemporâneo. Pode desfrutar de mobiliário natural de design único em sua casa, sabendo que todos os móveis de madeira são trabalhados apartir de madeiras sustentáveis num recurso renovável, em que por cada árvore colhida outras árvores serão plantadas. Cada peça de mobiliário natural tem o seu próprio caráter não havendo duas peças iguais."
+                 }
+            },
+        },
+        "services":{
+                "title": "Móveis Personalizados",
+                "subtitle": "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
+                "items":[
+                    {
+                        title: "Móveis Personalizados",
+                        text: "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
+                        image: `${base}/images/background_main_images.jpg`
+                    },
+                    {
+                        title: "Design Exclusivo",
+                        text: "Desenvolvemos móveis rústicos com design exclusivo, feitos sob medida para complementar o seu ambiente. Cada criação é pensada para unir a beleza natural da madeira com a funcionalidade, resultando em peças que se destacam pelo seu caráter único e pelo cuidado artesanal.",
+                        image:  `${base}/images/section_image2.jpg`
+                    },
+                    {
+                        title: "Móveis Artesanais",
+                        text: "Oferecemos a criação de móveis artesanais sob encomenda, feitos com madeira rústica de alta qualidade. Nossos artesãos dedicam-se a cada detalhe, garantindo que cada peça seja uma obra de arte funcional, adaptada às suas especificações e que traga aconchego e estilo ao seu lar.",
+                        image: `${base}/images/section_image3.jpg`
+                    }
+                ]
+            },
+            "projects":{
+                "title":"PROJETOS",
+                "cats": [
+                    {name: "Todos", id: "all"},
+                    {name: "Mobiliário de quarto", id: "cat_1"},
+                    {name: "Mesas", id: "cat_2"},
+                    {name: "Espelhos", id: "cat_3"},
+                ],
+                "items": [
+                    {cat: "cat_1", title: "Cama de Casal", image: `${base}/images/projects_cama.jpg`, url:"#"},
+                    {cat: "cat_1", title: "Beliche", image: `${base}/images/projects_cama2.jpg`, url:"#"},
+                    {cat: "cat_1", title: "Cómoda", image: `${base}/images/projects_cama3.jpg`, url:"#"},
+                    {cat: "cat_2", title: "Mesa", image: `${base}/images/projects_mesas.jpg`, url:"#"},
+                    {cat: "cat_2", title: "Mesa de Sala", image: `${base}/images/projects_mesas2.jpg`, url:"#"},
+                    {cat: "cat_2", title: "Mesa de centro", image: `${base}/images/projects_mesas3.jpg`, url:"#"},
+                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho.jpg`, url:"#"},
+                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho2.jpg`, url:"#"},
+                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho3.jpg`, url:"#"},
+                ]
+            },
+            "contact":{
+                "title" : "Contacte-nos",
+                "text" : "Estamos situados num local estratégico para melhor o servir. Descubra como nos encontrar e aproveite a conveniência de ter os nossos serviços por perto.",
+                "address" : "CARREIRINHA DAS MOÇAS CX-POSTAL 510X, 8550-427 Monchique",
+                "phone" : "+351 910 679 001",
+                "email" : "josegilvarela@hotmail.com",
+                "iframe": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1844.526477498277!2d-8.548719872119209!3d37.31303995225497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1b2197952aabcd%3A0xf77e066ccd198de5!2sMonchimoveis!5e1!3m2!1spt-PT!2spt!4v1723660795495!5m2!1spt-PT!2spt"
+            }
+       
+    }
+}

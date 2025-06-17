@@ -1,10 +1,10 @@
 <script>
     import FavMessage from "../ShowMessage.svelte";
-    import FavProductIcon from "../FavProductIcon.svelte";
-    import UnFavProduct from "../UnFavProduct.svelte";
+    import FavProductIcon from "../icons/FavProductIcon.svelte";
+    import UnFavProduct from "../icons/UnFavProductIcon.svelte";
     import { fly } from 'svelte/transition';
     import { FavHandler } from '../../../utils/fav-handler.utils.svelte.js';
-    import ContactIcon from "../ContactIcon.svelte";
+    import ContactIcon from "../icons/ContactIcon.svelte";
     import InterestedProduct from "./interestedProduct.svelte";
     const { imagesPath, product } = $props();
     const favHandler = new FavHandler();

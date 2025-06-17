@@ -2,10 +2,7 @@
 <script>
     import FacebookIcon from "./FacebookIcon.svelte";
     import InstagramIcon from "./InstagramIcon.svelte";
-
-    let instagramUrl = "https://www.instagram.com/josegilvarela/";
-    let facebookUrl = "https://www.facebook.com/profile.php?id=61551917374580&locale=pt_PT";
-
+    const {config} =$props();
 </script>
 <style>
 #footer {
@@ -45,10 +42,10 @@
         <div class="socialMedia">
             <ul>
                 <li>
-                    <a class="footerIcon" href={facebookUrl} target="_blank"><FacebookIcon /></a>
+                    <a class="footerIcon" href={config.facebook_url} target="_blank"><FacebookIcon /></a>
                 </li>
                 <li>
-                    <a class="footerIcon" href={instagramUrl} target="_blank"><InstagramIcon /></a>
+                    <a class="footerIcon" href={config.instagram_url} target="_blank"><InstagramIcon /></a>
                 </li>
             </ul>
         </div>

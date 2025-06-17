@@ -4,10 +4,12 @@
     import Services from '../components/services/Services.svelte';
     import Project from '../components/projects/Project.svelte';
     import Contact from '../components/contact/Contact.svelte';
-</script>
 
-<Intro imageUrl="/images/background_main_images.jpg" />
-<About/>
-<Services/>
-<Project/>
-<Contact/>
+    import config from '$lib/config.js';
+
+</script>
+<Intro config={config.main_page.home} />
+<About config={config.main_page.about}/>
+<Services config={config.main_page.services}/>
+<Project config={config.main_page.projects}/>
+<Contact config={config.main_page.contact}/>
