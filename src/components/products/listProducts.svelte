@@ -111,6 +111,8 @@
     }
     searchParams.set("limit",limit)
 
+    searchParams.delete("order_by")
+    searchParams.delete("order")
     let orderedEndpoint = `${endpoint}?${searchParams.toString()}&order_by=${getOrderProduct()} `
 
     const response = await fetch(orderedEndpoint);
