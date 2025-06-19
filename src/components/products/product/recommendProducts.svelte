@@ -37,7 +37,7 @@
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between py-4">
         <h3 class="text-gray-800 text-xl font-semibold">
-            Produtos relacionados na categoria: <a href="/products?category={categoryReference}" class="text-[#a7c44c] text-lg hover:underline"><span class="font-bold">{categoryName}</span></a>
+            Produtos relacionados na categoria: <a href="{config.directory}/products?category={categoryReference}" class="text-[#a7c44c] text-lg hover:underline"><span class="font-bold">{categoryName}</span></a>
           </h3>
       </div>
   
@@ -49,7 +49,7 @@
         <div class="bg-white flex flex-col rounded overflow-hidden shadow-md hover:scale-[1.01] transition-all">
             <div class="w-full">
               <img src="{images_domain}{product.main_image.location}{product.main_image.name}" alt="{product.title}"
-                class="w-[200] w-md-full object-cover object-top aspect-[230/307]" />
+                class="w-md-full object-cover object-top aspect-[230/307]" />
             </div>
             
 
@@ -83,7 +83,7 @@
 
       </div>
       <div class="flex flex-col justify-center items-center">
-      <a href="/products?category={categoryReference}"  class="mt-4 px-5 py-2 cursor-pointer bg-green-600 hover:bg-green-700 text-white font-medium rounded">
+      <a href="{config.directory}/products?category={categoryReference}"  class="mt-4 px-5 py-2 cursor-pointer bg-green-600 hover:bg-green-700 text-white font-medium rounded">
         Ver mais
       </a>
     </div>
