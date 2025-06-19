@@ -4,6 +4,7 @@
     import ContactIcon from "../products/icons/ContactIcon.svelte";
     import { FavHandler } from "../../utils/fav-handler.utils.svelte";
     import InterestedProduct from "../products/product/interestedProduct.svelte";
+    import config from "$lib/config";
     const favHandler = new FavHandler()
     const imagePath = "https://api.monchimoveis.pt/static/images/"
     const {product} = $props();
@@ -49,7 +50,7 @@
 {#if !hideProductRemoved}
 <tr class="bg-white hover:bg-gray-50 cursor-pointer">
     <td  class="px-1 md:px-4 py-2 font-semibold">
-        <a class="mobileText hover:underline" href={`/product?reference=${product.title}-${product.id}`}> {product.title}</a>
+        <a class="mobileText hover:underline" href={`${config.directory}/product?reference=${product.title}-${product.id}`}> {product.title}</a>
     </td>
     <td class="px-1 md:px-4 py-2 max-w-[200px] overflow-hidden text-ellipsis hidden lg:block" 
         >
