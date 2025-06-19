@@ -3,15 +3,16 @@ export default {
     // "apiUrl": "http://127.0.0.1:9898/api/v1/content/public/"
     "apiUrl": "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/",
     "imagesUrl":"https://api.monchimoveis.pt/static/images/",
+    "directory":"./Monchimoveis-FE-Svelte",
     "navbar": {
         "title": "Monchimóveis",
         "items": [
-            {href: "/#about", text: "Nós"},
-            {href: "#", text: "Serviços"},
-            {href: "#", text: "Projetos"},
-            {href: "#", text: "Contacto"},
-            {href: "/products", text: "Produtos", icon: "bag"},
-            {href: "#", text: "Favoritos", icon: "star"},
+            {href: "./Monchimoveis-FE-Svelte/#about", text: "Nós"},
+            {href: "./Monchimoveis-FE-Svelte/#services", text: "Serviços"},
+            {href: "./Monchimoveis-FE-Svelte/#projects", text: "Projetos"},
+            {href: "./Monchimoveis-FE-Svelte/#contact", text: "Contacto"},
+            {href: "./Monchimoveis-FE-Svelte/products", text: "Produtos", icon: "bag"},
+            {href: "./Monchimoveis-FE-Svelte/favs", text: "Favoritos", icon: "star"},
         ]
     },
     "footer":{
@@ -72,15 +73,15 @@ export default {
                     {name: "Espelhos", id: "cat_3"},
                 ],
                 "items": [
-                    {cat: "cat_1", title: "Cama de Casal", image: `${base}/images/projects_cama.jpg`, url:"#"},
-                    {cat: "cat_1", title: "Beliche", image: `${base}/images/projects_cama2.jpg`, url:"#"},
-                    {cat: "cat_1", title: "Cómoda", image: `${base}/images/projects_cama3.jpg`, url:"#"},
-                    {cat: "cat_2", title: "Mesa", image: `${base}/images/projects_mesas.jpg`, url:"#"},
-                    {cat: "cat_2", title: "Mesa de Sala", image: `${base}/images/projects_mesas2.jpg`, url:"#"},
-                    {cat: "cat_2", title: "Mesa de centro", image: `${base}/images/projects_mesas3.jpg`, url:"#"},
-                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho.jpg`, url:"#"},
-                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho2.jpg`, url:"#"},
-                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho3.jpg`, url:"#"},
+                    {cat: "cat_1", title: "Cama de Casal", image: `${base}/images/projects_cama.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Cama/bed-10"},
+                    {cat: "cat_1", title: "Beliche", image: `${base}/images/projects_cama2.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Beliche%20/bunk%20Bed-11"},
+                    {cat: "cat_1", title: "Cómoda", image: `${base}/images/projects_cama3.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Mesa%20de%20cabeceira/bedside%20table-13"},
+                    {cat: "cat_2", title: "Mesa", image: `${base}/images/projects_mesas.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Mesa%20de%20sala/living%20table-15"},
+                    {cat: "cat_2", title: "Mesa de Sala", image: `${base}/images/projects_mesas2.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Mesa/table-6"},
+                    {cat: "cat_2", title: "Mesa de centro", image: `${base}/images/projects_mesas3.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Mesa%20centro/center%20table-44"},
+                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-24"},
+                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho2.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-26"},
+                    {cat: "cat_3", title: "Espelho", image: `${base}/images/projects_espelho3.jpg`, url:"./Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-41"},
                 ]
             },
             "contact":{

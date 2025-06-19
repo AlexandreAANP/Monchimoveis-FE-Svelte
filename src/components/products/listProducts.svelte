@@ -249,7 +249,7 @@
                   </div>
                 </div>
               </div>
-              <a class="cursor-pointer" href="/product?reference={product.title}-{product.id}" >
+              <a class="cursor-pointer" href="{config.directory}/product?reference={product.title}-{product.id}" >
                 <button class="buttonText cursor-pointer px-2 h-9 font-semibold w-full mt-4 bg-green-600 hover:bg-green-700 text-white tracking-wide ml-auto outline-none border-none rounded">Mais Informação</button>
               </a>
             </div>
