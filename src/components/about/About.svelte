@@ -1,7 +1,6 @@
 <script>
     import AboutText from "./AboutText.svelte";
     const {config} = $props();
-    console.log(config)
 </script>
 <style>
     #about {

@@ -1,3 +1,6 @@
+<script>
+  import config  from "$lib/config";
+</script>
 <div class="flex flex-col justify-center items-center h-full text-center rounded-lg p-6">
     <!-- Ícone de estrela -->
     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -15,7 +18,7 @@
     </p>
   
     <!-- Botão opcional -->
-    <a href="/produtos" class="mt-6 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+    <a href="{config.directory}/produtos" class="mt-6 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
       Ver produtos
     </a>
   </div>

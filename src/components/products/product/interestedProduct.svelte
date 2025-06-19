@@ -30,7 +30,6 @@
 
     async function showMessage() {
         successMessage = __successMessage;
-        console.log(isBlock)
         setTimeout(() => {successMessage = ""; !isBlock && hideFunction()}, 3000);
     }
 
@@ -44,7 +43,6 @@
     }
 
     function validateForm() {
-        console.log(productMessage)
         errors = { name: '', email: '', telefone: '', message: '' };
 
         if (!productMessage.name.trim()) errors.name = 'Nome é obrigatório.';
@@ -60,7 +58,6 @@
         if(validateForm()){
             //send message
             let productID = productReference.split("-")
-            console.log(productID)
             productID = productID[productID.length - 1];
             const response = await fetch(apiEndpoint, {method:"POST", body: JSON.stringify({
                 "product_id": productID,

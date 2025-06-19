@@ -6,8 +6,8 @@
     import { onMount } from "svelte";
     import CloseNavBarIcon from './CloseNavBarIcon.svelte';
     import OpenNavBarIcon from './OpenNavBarIcon.svelte';
-    const {config} = $props();
-    let isOnTop = $state(true);
+    const {config, notInTop} = $props();
+    let isOnTop = $state(notInTop ? false : true);
     let openNav = $state(false);
 
     
@@ -21,7 +21,8 @@
             if (window.scrollY > 0) {
                 isOnTop = false;
             } else {
-                isOnTop = true;
+                
+                isOnTop = notInTop ? false : true;
             }
         });
     });

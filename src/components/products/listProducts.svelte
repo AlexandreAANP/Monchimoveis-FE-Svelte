@@ -8,7 +8,7 @@
     import { FavHandler } from "../../utils/fav-handler.utils.svelte";
     import ShowMessage from "./ShowMessage.svelte";
      import config from '$lib/config.js';
-    const images_domain = "https://api.monchimoveis.pt/static/images/"
+    const images_domain = config.imagesUrl;
     const favHandler = new FavHandler();
 
     let {actualCategory} = $props()

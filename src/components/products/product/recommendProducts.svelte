@@ -6,7 +6,7 @@
     import config from "$lib/config";
     const favHandler = new FavHandler();
     const {categoryReference} = $props();
-    const images_domain = "https://api.monchimoveis.pt/static/images/"
+    const images_domain = config.imagesUrl;
     const apiEndpoint = `${config.apiUrl}products?limit=4&category=`;
     
     let categoryName = categoryReference.split("-");
