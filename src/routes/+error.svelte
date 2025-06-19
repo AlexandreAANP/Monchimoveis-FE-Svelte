@@ -1,5 +1,6 @@
 <script>
   import { page } from '$app/state';
+  import {config} from "$lib/config"
 </script>
 
 <div class="min-h-screen flex flex-col justify-center items-center bg-gray-300 text-center px-4">
@@ -11,7 +12,7 @@
     <p class="text-gray-600 mb-6">
       {page.error?.message || "An unexpected error occurred. Please try again later."}
     </p>
-    <a href="/" class="inline-block bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition">
+    <a href="{config.directory}/" class="inline-block bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition">
       Go to Homepage
     </a>
   </div>
