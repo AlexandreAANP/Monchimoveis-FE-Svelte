@@ -1,6 +1,6 @@
 <script>
   import { page } from '$app/state';
-  import {config} from "$lib/config"
+  import config from '$lib/config.js';
 </script>
 
 <div class="min-h-screen flex flex-col justify-center items-center bg-gray-300 text-center px-4">
