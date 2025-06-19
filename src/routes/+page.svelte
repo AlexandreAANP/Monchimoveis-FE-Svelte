@@ -5,7 +5,7 @@
     import Project from '../components/projects/Project.svelte';
     import Contact from '../components/contact/Contact.svelte';
 
-    import config from '$lib/config.js';
+    import config from '$lib/config.json';
 
 </script>
 <Intro config={config.main_page.home} />
