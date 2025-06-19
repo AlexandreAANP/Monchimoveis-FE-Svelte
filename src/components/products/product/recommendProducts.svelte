@@ -3,7 +3,7 @@
     import UnFavProduct from "../icons/UnFavProductIcon.svelte";
     import FavMessage from "../ShowMessage.svelte"
     import { FavHandler } from "../../../utils/fav-handler.utils.svelte";
-    import config from "$lib/config";
+    import config from "$lib/config.json";
     const favHandler = new FavHandler();
     const {categoryReference} = $props();
     const images_domain = config.imagesUrl;

@@ -5,7 +5,7 @@
     import OpenCategoriesIcon from "./icons/OpenCategoriesIcon.svelte";
     import CloseCategoriesIcon from "./icons/CloseCategoriesIcon.svelte";
     import { slide } from 'svelte/transition';
-    import config from '$lib/config.js';
+    import config from '$lib/config.json';
     const endpoint = `${config.apiUrl}categories`
   
   

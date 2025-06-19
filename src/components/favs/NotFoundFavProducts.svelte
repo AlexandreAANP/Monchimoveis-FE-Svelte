@@ -1,5 +1,5 @@
 <script>
-  import config  from "$lib/config";
+  import config  from "$lib/config.json";
 </script>
 <div class="flex flex-col justify-center items-center h-full text-center rounded-lg p-6">
     <!-- Ícone de estrela -->

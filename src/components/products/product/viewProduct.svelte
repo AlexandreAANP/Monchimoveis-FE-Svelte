@@ -6,7 +6,7 @@
     import { FavHandler } from '../../../utils/fav-handler.utils.svelte.js';
     import ContactIcon from "../icons/ContactIcon.svelte";
     import InterestedProduct from "./interestedProduct.svelte";
-    import config from "$lib/config";
+    import config from "$lib/config.json";
     const { imagesPath, product } = $props();
     const favHandler = new FavHandler();
     let hideInterestedProductComponent = $state(true);

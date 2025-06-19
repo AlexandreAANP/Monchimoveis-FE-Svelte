@@ -2,7 +2,7 @@
 	import '../app.css';
 	import Navbar from '../components/navbar/Navbar.svelte';
 	import Footer from '../components/footer/Footer.svelte';
-	import config from '$lib/config.js';
+	import config from '$lib/config.json';
 	import { page } from '$app/state';
 	let { children } = $props();
 	

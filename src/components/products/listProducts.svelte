@@ -7,7 +7,7 @@
     import { replaceState } from "$app/navigation";
     import { FavHandler } from "../../utils/fav-handler.utils.svelte";
     import ShowMessage from "./ShowMessage.svelte";
-     import config from '$lib/config.js';
+     import config from '$lib/config.json';
     const images_domain = config.imagesUrl;
     const favHandler = new FavHandler();
 

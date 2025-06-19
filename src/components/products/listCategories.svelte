@@ -3,7 +3,7 @@
   import { replaceState } from '$app/navigation';
   import { page } from '$app/stores';
   import { get } from 'svelte/store';
-  import config from '$lib/config.js';
+  import config from '$lib/config.json';
   const endpoint = `${config.apiUrl}categories`
 
   async function fetchCategories() {

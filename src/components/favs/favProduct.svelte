@@ -4,7 +4,7 @@
     import ContactIcon from "../products/icons/ContactIcon.svelte";
     import { FavHandler } from "../../utils/fav-handler.utils.svelte";
     import InterestedProduct from "../products/product/interestedProduct.svelte";
-    import config from "$lib/config";
+    import config from "$lib/config.json";
     const favHandler = new FavHandler()
     const imagePath = config.imagesUrl
     const {product} = $props();

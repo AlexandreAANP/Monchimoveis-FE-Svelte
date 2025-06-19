@@ -1,5 +1,5 @@
 <script>
-  import config from "$lib/config"
+  import config from "$lib/config.json"
     const {productReference} = $props()
 </script>
 
