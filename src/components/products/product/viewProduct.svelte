@@ -6,6 +6,7 @@
     import { FavHandler } from '../../../utils/fav-handler.utils.svelte.js';
     import ContactIcon from "../icons/ContactIcon.svelte";
     import InterestedProduct from "./interestedProduct.svelte";
+    import config from "$lib/config";
     const { imagesPath, product } = $props();
     const favHandler = new FavHandler();
     let hideInterestedProductComponent = $state(true);
@@ -185,7 +186,7 @@
       
         <!-- This will now stick to the bottom -->
         <div class="mt-6 text-right pr-5 pt-5">
-          <a href="/products?category={product.category.name}-{product.category.id}" class="text-[#a7c44c] text-lg hover:underline">
+          <a href="{config.directory}/products?category={product.category.name}-{product.category.id}" class="text-[#a7c44c] text-lg hover:underline">
             {product.category.name}
           </a>
         </div>
