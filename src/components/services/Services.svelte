@@ -1,25 +1,6 @@
 <script>
-    import { base } from '$app/paths';
     import ServiceItem from './ServiceItem.svelte';
-    const title = "Móveis Personalizados";
-    const text =  "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.";
-    const serviceItems = [
-        {
-            title: "Móveis Personalizados",
-            text: "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
-            image: `${base}/images/background_main_images.jpg`
-        },
-        {
-            title: "Design Exclusivo",
-            text: "Desenvolvemos móveis rústicos com design exclusivo, feitos sob medida para complementar o seu ambiente. Cada criação é pensada para unir a beleza natural da madeira com a funcionalidade, resultando em peças que se destacam pelo seu caráter único e pelo cuidado artesanal.",
-            image:  `${base}/images/section_image2.jpg`
-        },
-        {
-            title: "Móveis Artesanais",
-            text: "Oferecemos a criação de móveis artesanais sob encomenda, feitos com madeira rústica de alta qualidade. Nossos artesãos dedicam-se a cada detalhe, garantindo que cada peça seja uma obra de arte funcional, adaptada às suas especificações e que traga aconchego e estilo ao seu lar.",
-            image: `${base}/images/section_image3.jpg`
-        }
-    ];
+    const {config} = $props();
 </script>
 
 <style>
@@ -75,17 +56,17 @@
 
 <div id="services" class="flex flex-row items-center justify-center">
     <div class="max-w-[1170px] flex flex-col items-center justify-center">
-        <h1>{title}</h1>
+        <h1>{config.title}</h1>
         <hr/>
 
         <p class="service-p-title pr-5 pl-5">
-            {text}
+            {config.subtitle}
         </p>
 
         <div class="flex flex-col md:flex-row flex-nowrap items-center justify-center gap-5 divItem">
-            {#each serviceItems as serviceItem, index}
+            {#each config.items as serviceItem, index}
                 <ServiceItem {...serviceItem}/>
-                {#if index !== serviceItems.length - 1}
+                {#if index !== config.items.length - 1}
                     <hr class="hr hr-for-mobile"/>
                 {/if}
             {/each}

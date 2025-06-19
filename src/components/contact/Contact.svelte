@@ -1,10 +1,5 @@
 <script>
-
-    const title = "Contacte-nos";
-    const text = "Estamos situados num local estratégico para melhor o servir. Descubra como nos encontrar e aproveite a conveniência de ter os nossos serviços por perto.";
-    const address = "CARREIRINHA DAS MOÇAS CX-POSTAL 510X, 8550-427 Monchique";
-    const phone = "+351 910 679 001"
-    const email = "josegilvarela@hotmail.com"
+    const {config} = $props();
 </script>
 
 <style>
@@ -97,10 +92,10 @@
 <div id="contact" class="flex flex-col items-center justify-center">
     <div class="flex flex-col items-center justify-center max-w-[1170px]">
         <div class="section flex flex-col items-center justify-center pr-5 pl-5">
-            <h2 >{title}</h2>
+            <h2 >{config.title}</h2>
             <hr/>
             <p>
-                {text}
+                {config.text}
             </p>
         </div>
 
@@ -109,15 +104,15 @@
                     <h3>Contacto</h3>
                     <div class="item flex flex-row md:flex-col w-full">
                         <span class="pr-5 md:pr-0">Morada:</span>
-                        <p >{address}</p>
+                        <p >{config.address}</p>
                     </div>
                     <div class="item flex flex-row md:flex-col w-full">
                         <span class="pr-5 md:pr-0">Email:</span>
-                        <p>{email}</p>
+                        <p>{config.email}</p>
                     </div>
                     <div class="item flex flex-row md:flex-col w-full">
                         <span class="pr-5 md:pr-0">Telefone:</span>
-                        <p>{phone}</p>
+                        <p>{config.phone}</p>
                     </div>
             </div>
             <div class="basis-8/12 flex flex-col items-left justify-left pl-5">
@@ -126,7 +121,7 @@
                 </h3>
                 <iframe 
                     title="Nossa localização"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1844.526477498277!2d-8.548719872119209!3d37.31303995225497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1b2197952aabcd%3A0xf77e066ccd198de5!2sMonchimoveis!5e1!3m2!1spt-PT!2spt!4v1723660795495!5m2!1spt-PT!2spt"
+                    src="{config.iframe}"
                     width="100%"
                     height="450"
                     style="border: 0"

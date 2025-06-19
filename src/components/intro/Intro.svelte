@@ -1,11 +1,5 @@
 <script>
-
-    let props = $props();
-    let title = "MonchiMóveis";
-    let subtitle = "Móveis Rústicos de Madeira Natural";
-    let buttonContent = "SABER MAIS";
-    let buttonHref = "#about";
-    import { base } from '$app/paths';
+    const {config} = $props();
 </script>
 
 <style>
@@ -77,21 +71,21 @@
 </style>
 
 <header>
-    <div class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background-image: {`url(${base}${props.imageUrl})`}">
+    <div class="flex justify-center items-center h-screen bg-background text-foreground mainDiv" style="background-image: {`url(${config.backgroundImage})`}">
         <div class="absolute top-0 left-0 w-full h-full mainDiv2">
             <div class="container mx-auto text-center">
                 <div class="row">
                     <div class="container mx-auto text-center mainDiv3" >
                         <h1>
                             <strong>
-                                {title}
+                                {config.title}
                             </strong>
                             <span class="spanDash"> / </span>
-                            {subtitle}
+                            {config.subtitle}
                         </h1>
                         <p></p>
-                        <a class="button" href={buttonHref}>
-                            {buttonContent}
+                        <a class="button" href={config.button.href}>
+                            {config.button.content}
                         </a>
                     </div>
                 </div>

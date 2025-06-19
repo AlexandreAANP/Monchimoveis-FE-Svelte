@@ -1,29 +1,12 @@
-<script lang="ts">
-    import { fly, fade } from 'svelte/transition';
+<script>
+    import {fly} from 'svelte/transition';
     import TranslateIcon from './TranslateIcon.svelte';
-    import { quintOut } from 'svelte/easing';
-
-    
-    type Language = 'pt' | 'en';
-    let language: Language = "pt";
-
-    let subtitle: string = "MÓVEIS ARTESANAIS";
-    let text: string = "Não há nada que se compare ao mobiliário natural. Todos os móveis são artesanais, fabricados em Monchique de madeira maciça das mais variadas espécies oriundas da serra de Monchique no Algarve. A linha entre móveis rústicos e a forma natural da madeira cruzam-se numa simbiose perfeita entre as peças naturais com bases modernas, que se enquadram perfeitamente num ambiente contemporâneo. Pode desfrutar de mobiliário natural de design único em sua casa, sabendo que todos os móveis de madeira são trabalhados apartir de madeiras sustentáveis num recurso renovável, em que por cada árvore colhida outras árvores serão plantadas. Cada peça de mobiliário natural tem o seu próprio caráter não havendo duas peças iguais.";
-    let enSubtitle: string = "NATURAL WOOD FURNITURE";
-    let enText: string = "There is nothing that compares to the natural wood furniture. All furnishings are handcrafted in Monchique manufactured of solid wood in a variety of species from the mountains of Monchique in the Algarve. The line between rustic furniture and the natural shape of the wood intersects in a perfect symbiosis between the natural bases which fit perfectly in a contemporary setting. You can enjoy natural furniture unique design in your home, knowing that all wooden furniture are crafted from sustainable wood a renewable resource, where for every tree harvest other trees will be planted. Each piece of furniture has naturally its own character so you wont find two pieces alike.";
-
+    const {config} = $props();
+    let language= $state("pt");
     function toggleLanguage() {
         language = language === "pt" ? "en" : "pt";
     }
-
-
-  const translations = {
-    en: { subtitle: enSubtitle, text: enText },
-    pt: { subtitle: subtitle, text: text }
-  };
-
   
-
 </script>
 
 <style>
@@ -85,7 +68,7 @@
                 class="subtitle"
                 in:fly={{ y: -200, opacity: 0, duration: 600 }}
                 >
-                {translations[language].subtitle}
+                {config[language].subtitle}
             </h3>
             {/key}       
         </div>
@@ -93,7 +76,7 @@
         <div class="mb-3 flex justify-end pt-2 pr-2 ">
             <button
             class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none translateButton"
-            on:click={toggleLanguage}
+            onclick={toggleLanguage}
             >
             <TranslateIcon />
             </button>
@@ -106,7 +89,7 @@
             class="subtext"
             in:fly={{ y: -200, opacity: 0, duration: 600 }}
             >
-            {translations[language].text}
+            {config[language].text}
 
         </p>
         {/key}
