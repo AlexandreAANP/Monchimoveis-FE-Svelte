@@ -3,8 +3,8 @@
   import { replaceState } from '$app/navigation';
   import { page } from '$app/stores';
   import { get } from 'svelte/store';
-  
-  const endpoint = `http://localhost:9898/api/v1/content/public/category`
+  import config from '$lib/config.js';
+  const endpoint = `${config.apiUrl}categories`
 
   async function fetchCategories() {
     const response = await fetch(endpoint);

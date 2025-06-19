@@ -3,10 +3,12 @@
     import UnFavProduct from "../icons/UnFavProductIcon.svelte";
     import FavMessage from "../ShowMessage.svelte"
     import { FavHandler } from "../../../utils/fav-handler.utils.svelte";
+    import config from "$lib/config";
     const favHandler = new FavHandler();
     const {categoryReference} = $props();
     const images_domain = "https://api.monchimoveis.pt/static/images/"
-    const apiEndpoint = "http://127.0.0.1:9898/api/v1/content/public/product?limit=4&category=";
+    const apiEndpoint = `${config.apiUrl}products?limit=4&category=`;
+    
     let categoryName = categoryReference.split("-");
     categoryName = categoryName.slice(0,categoryName.length-1)
     categoryName = categoryName.join("-")

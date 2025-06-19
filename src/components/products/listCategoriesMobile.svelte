@@ -5,7 +5,8 @@
     import OpenCategoriesIcon from "./icons/OpenCategoriesIcon.svelte";
     import CloseCategoriesIcon from "./icons/CloseCategoriesIcon.svelte";
     import { slide } from 'svelte/transition';
-    const endpoint = `http://localhost:9898/api/v1/content/public/category`
+    import config from '$lib/config.js';
+    const endpoint = `${config.apiUrl}categories`
   
   
   let isCategoriesOpen = $state(false);

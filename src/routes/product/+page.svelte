@@ -5,9 +5,10 @@
     import { base } from '$app/paths';
     import RecommendProducts from "../../components/products/product/recommendProducts.svelte";
     import NotFoundProduct from "../../components/products/product/NotFoundProduct.svelte";
+    import config from "$lib/config";
     const product_reference =  new URLSearchParams(get(page).url.search).get("reference");
-    const apiEndpoint = "http://localhost:9898/api/v1/content/public/product"
-    const imagesPath = "https://api.monchimoveis.pt/static/images/"
+    const apiEndpoint = `${config.apiUrl}product`
+    const imagesPath = config.imagesUrl;
     const bgImageUrl = `${base}/images/background_main_images.jpg`;
 
     async function fetchProduct(){

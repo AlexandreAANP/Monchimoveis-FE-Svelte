@@ -5,7 +5,8 @@
     import ShowMessage from "../ShowMessage.svelte";
     import {blockProduct, loadProductMessage} from "../../../utils/block-product.utils.svelte"
     import ShowWarningMessage from "../ShowWarningMessage.svelte";
-    const apiEndpoint = "http://localhost:9898/api/v1/content/product/add/interested"
+    import config from "$lib/config"
+    const apiEndpoint = `${config.apiUrl}product/add/interested`
     const __successMessage = "A sua Mensagem foi enviada com sucesso!<br>Entraremos em contacto consigo assim que possível"
     const __warningBlockedProductMessage = "⚠️ Já recebemos uma mensagem sua recentemente.<br> Por favor, aguarde pelo menos 24 horas antes de enviar outra."
 

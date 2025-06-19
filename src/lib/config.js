@@ -1,5 +1,8 @@
 import { base } from '$app/paths';
 export default {
+    // "apiUrl": "http://127.0.0.1:9898/api/v1/content/public/"
+    "apiUrl": "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/",
+    "imagesUrl":"https://api.monchimoveis.pt/static/images/",
     "navbar": {
         "title": "Monchimóveis",
         "items": [
@@ -40,26 +43,26 @@ export default {
             },
         },
         "services":{
-                "title": "Móveis Personalizados",
-                "subtitle": "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
-                "items":[
-                    {
-                        title: "Móveis Personalizados",
-                        text: "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
-                        image: `${base}/images/background_main_images.jpg`
-                    },
-                    {
-                        title: "Design Exclusivo",
-                        text: "Desenvolvemos móveis rústicos com design exclusivo, feitos sob medida para complementar o seu ambiente. Cada criação é pensada para unir a beleza natural da madeira com a funcionalidade, resultando em peças que se destacam pelo seu caráter único e pelo cuidado artesanal.",
-                        image:  `${base}/images/section_image2.jpg`
-                    },
-                    {
-                        title: "Móveis Artesanais",
-                        text: "Oferecemos a criação de móveis artesanais sob encomenda, feitos com madeira rústica de alta qualidade. Nossos artesãos dedicam-se a cada detalhe, garantindo que cada peça seja uma obra de arte funcional, adaptada às suas especificações e que traga aconchego e estilo ao seu lar.",
-                        image: `${base}/images/section_image3.jpg`
-                    }
-                ]
-            },
+            "title": "Móveis Personalizados",
+            "subtitle": "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
+            "items":[
+                {
+                    title: "Móveis Personalizados",
+                    text: "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
+                    image: `${base}/images/background_main_images.jpg`
+                },
+                {
+                    title: "Design Exclusivo",
+                    text: "Desenvolvemos móveis rústicos com design exclusivo, feitos sob medida para complementar o seu ambiente. Cada criação é pensada para unir a beleza natural da madeira com a funcionalidade, resultando em peças que se destacam pelo seu caráter único e pelo cuidado artesanal.",
+                    image:  `${base}/images/section_image2.jpg`
+                },
+                {
+                    title: "Móveis Artesanais",
+                    text: "Oferecemos a criação de móveis artesanais sob encomenda, feitos com madeira rústica de alta qualidade. Nossos artesãos dedicam-se a cada detalhe, garantindo que cada peça seja uma obra de arte funcional, adaptada às suas especificações e que traga aconchego e estilo ao seu lar.",
+                    image: `${base}/images/section_image3.jpg`
+                }
+            ]
+        },
             "projects":{
                 "title":"PROJETOS",
                 "cats": [

@@ -7,6 +7,7 @@
     import { replaceState } from "$app/navigation";
     import { FavHandler } from "../../utils/fav-handler.utils.svelte";
     import ShowMessage from "./ShowMessage.svelte";
+     import config from '$lib/config.js';
     const images_domain = "https://api.monchimoveis.pt/static/images/"
     const favHandler = new FavHandler();
 
@@ -20,8 +21,7 @@
     let productsList = []
     let lastUpdate = $state(new Date());
     let hasMoreProducts = $state(true);
-    // const endpoint = "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/products";
-    let endpoint = `http://localhost:9898/api/v1/content/public/product`;
+    let endpoint = `${config.apiUrl}products`;
 
 
     async function fetchProducts(searchParams) {
@@ -117,7 +117,6 @@
     const code = await response.json();
     if(code.content.products.length == 0){
       hasMoreProducts = false;
-      // throw new Error("NotFound");
     }
     searchParams.delete("limit")
     replaceState(`${window.location.origin}${window.location.pathname}?${searchParams.toString()}&order_by=${getOrderProduct()}`);
