@@ -6,7 +6,7 @@
     import InterestedProduct from "../products/product/interestedProduct.svelte";
     import config from "$lib/config";
     const favHandler = new FavHandler()
-    const imagePath = "https://api.monchimoveis.pt/static/images/"
+    const imagePath = config.imagesUrl
     const {product} = $props();
     let hideInterestedProductComponent = $state(true);
     let hideProductRemoved = $state(false);

@@ -1,4 +1,5 @@
 <script>
+  import config from "$lib/config"
     const {productReference} = $props()
 </script>
 
@@ -17,7 +18,7 @@
       </p>
   
       <!-- Back Button (optional) -->
-      <a href="/products" class="mt-4 inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+      <a href="{config.directory}/products" class="mt-4 inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
         Ver todos os produtos
       </a>
     </div>

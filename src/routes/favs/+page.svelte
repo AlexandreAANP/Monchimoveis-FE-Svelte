@@ -2,8 +2,10 @@
     import { base } from '$app/paths';
     import Favs from '../../components/favs/favs.svelte';
     import { getFavProducts, removeFavProductReference } from '../../utils/favs-products.utils.svelte';
+    import config from "$lib/config"
+    import NotFoundFavProducts from '../../components/favs/NotFoundFavProducts.svelte';
     const bgImageUrl = `${base}/images/background_main_images.jpg`;
-    const apiEndpointGetProduct = "http://localhost:9898/api/v1/content/public/product"
+    const apiEndpointGetProduct = `${config.apiUrl}product`
 
     async function fetchFavProducts (){
         return Promise.all( getFavProducts().map(async (productReference)=>{
@@ -65,13 +67,15 @@
             <div class="w-10 h-10 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         {:then data}
-        
-           <Favs products= {data}/>
+           
+           {#if data.length === 0}
+            <NotFoundFavProducts/>
+            {:else}
+            <Favs products= {data}/>
+            {/if}
         {/await}    
         
-        {#if !favs}
-        Sem produtos em favoritos
-        {/if}
+        
             </div>
                 </div>
         </div>

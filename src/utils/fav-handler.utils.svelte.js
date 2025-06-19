@@ -1,3 +1,4 @@
+import config from "$lib/config"
 export class FavHandler{
     constructor() {
         this.lastUpdate = $state(new Date());
@@ -16,10 +17,10 @@ export class FavHandler{
     async favHandler(productReference){
         if (this.isProductFav(productReference)) {
             this.unfavProduct(productReference);
-            this.showFavMessage("Produto removido dos <a href='/favoritos'><b>Favoritos</b></a>");
+            this.showFavMessage(`Produto removido dos <a href='${config.directory}/favs'><b>Favoritos</b></a>`);
         } else {
             this.favProduct(productReference);
-            this.showFavMessage("Produto adicionado aos <a href='/favoritos'><b>Favoritos</b></a>");
+            this.showFavMessage(`Produto adicionado aos <a href='${config.directory}/favs'><b>Favoritos</b></a>`);
         }
         this.lastUpdate = new Date();
     }

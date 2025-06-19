@@ -21,7 +21,7 @@
             throw new Error("NotFound")
         }
         const response = await fetch(`${apiEndpoint}/${id}?reference=${product_reference}`)
-        if (response.status == 401){
+        if (response.status == 404){
             throw new Error("NotFound");
         }
         else if(response.status == 200){

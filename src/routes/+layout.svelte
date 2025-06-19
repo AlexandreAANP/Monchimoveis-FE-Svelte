@@ -3,7 +3,9 @@
 	import Navbar from '../components/navbar/Navbar.svelte';
 	import Footer from '../components/footer/Footer.svelte';
 	import config from '$lib/config.js';
+	import { page } from '$app/state';
 	let { children } = $props();
+	
 </script>
 
 <style>
@@ -13,7 +15,7 @@
 	}
 </style>
 
-<Navbar config = {config.navbar}/>
+<Navbar config = {config.navbar} notInTop= {page.status !== 200}/>
 
 {@render children()}
 
