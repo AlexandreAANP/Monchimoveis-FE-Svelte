@@ -48,17 +48,17 @@
                 {
                     "title": "Móveis Personalizados",
                     "text": "Criamos móveis únicos e personalizados, em madeira rústica, para atender ás suas necessidades e estilo.",
-                    "image": "/Monchimoveis-FE-Svelte/static/images/background_main_images.jpg"
+                    "image": "/Monchimoveis-FE-Svelte/images/background_main_images.jpg"
                 },
                 {
                     "title": "Design Exclusivo",
                     "text": "Desenvolvemos móveis rústicos com design exclusivo, feitos sob medida para complementar o seu ambiente. Cada criação é pensada para unir a beleza natural da madeira com a funcionalidade, resultando em peças que se destacam pelo seu caráter único e pelo cuidado artesanal.",
-                    "image":  "/Monchimoveis-FE-Svelte/static/images/section_image2.jpg"
+                    "image":  "/Monchimoveis-FE-Svelte/images/section_image2.jpg"
                 },
                 {
                     "title": "Móveis Artesanais",
                     "text": "Oferecemos a criação de móveis artesanais sob encomenda, feitos com madeira rústica de alta qualidade. Nossos artesãos dedicam-se a cada detalhe, garantindo que cada peça seja uma obra de arte funcional, adaptada às suas especificações e que traga aconchego e estilo ao seu lar.",
-                    "image": "/Monchimoveis-FE-Svelte/static/images/section_image3.jpg"
+                    "image": "/Monchimoveis-FE-Svelte/images/section_image3.jpg"
                 }
             ]
         },
