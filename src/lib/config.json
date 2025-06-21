@@ -71,15 +71,15 @@
                     {"name": "Espelhos", "id": "cat_3"}
                 ],
                 "items": [
-                    {"cat": "cat_1", "title": "Cama de Casal", "image": "/images/projects_cama.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Cama/bed-10"},
-                    {"cat": "cat_1", "title": "Beliche", "image": "/images/projects_cama2.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Beliche%20/bunk%20Bed-11"},
-                    {"cat": "cat_1", "title": "Cómoda", "image": "/images/projects_cama3.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa%20de%20cabeceira/bedside%20table-13"},
-                    {"cat": "cat_2", "title": "Mesa", "image": "/images/projects_mesas.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa%20de%20sala/living%20table-15"},
-                    {"cat": "cat_2", "title": "Mesa de Sala", "image": "/images/projects_mesas2.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa/table-6"},
-                    {"cat": "cat_2", "title": "Mesa de centro", "image": "/images/projects_mesas3.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa%20centro/center%20table-44"},
-                    {"cat": "cat_3", "title": "Espelho", "image": "/images/projects_espelho.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-24"},
-                    {"cat": "cat_3", "title": "Espelho", "image": "/images/projects_espelho2.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-26"},
-                    {"cat": "cat_3", "title": "Espelho", "image": "/images/projects_espelho3.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-41"}
+                    {"cat": "cat_1", "title": "Cama de Casal", "image": "/Monchimoveis-FE-Svelte/images/projects_cama.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Cama/bed-10"},
+                    {"cat": "cat_1", "title": "Beliche", "image": "/Monchimoveis-FE-Svelte/images/projects_cama2.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Beliche%20/bunk%20Bed-11"},
+                    {"cat": "cat_1", "title": "Cómoda", "image": "/Monchimoveis-FE-Svelte/images/projects_cama3.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa%20de%20cabeceira/bedside%20table-13"},
+                    {"cat": "cat_2", "title": "Mesa", "image": "/Monchimoveis-FE-Svelte/images/projects_mesas.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa%20de%20sala/living%20table-15"},
+                    {"cat": "cat_2", "title": "Mesa de Sala", "image": "/Monchimoveis-FE-Svelte/images/projects_mesas2.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa/table-6"},
+                    {"cat": "cat_2", "title": "Mesa de centro", "image": "/Monchimoveis-FE-Svelte/images/projects_mesas3.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Mesa%20centro/center%20table-44"},
+                    {"cat": "cat_3", "title": "Espelho", "image": "/Monchimoveis-FE-Svelte/images/projects_espelho.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-24"},
+                    {"cat": "cat_3", "title": "Espelho", "image": "/Monchimoveis-FE-Svelte/images/projects_espelho2.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-26"},
+                    {"cat": "cat_3", "title": "Espelho", "image": "/Monchimoveis-FE-Svelte/images/projects_espelho3.jpg", "url":"/Monchimoveis-FE-Svelte/product?reference=Espelho/mirror-41"}
                 ]
             },
             "contact":{
