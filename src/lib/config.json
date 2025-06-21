@@ -1,6 +1,6 @@
 {
     "apiUrl": "https://kyr0knh6i4.execute-api.eu-central-1.amazonaws.com/dev/api/v2/",
-    "imagesUrl":"https://api.monchimoveis.pt/static/images/",
+    "imagesUrl":"https://d1cij19ideiivk.cloudfront.net/",
     "directory":"/Monchimoveis-FE-Svelte",
     "navbar": {
         "title": "Monchimóveis",

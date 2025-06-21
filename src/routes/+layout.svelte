@@ -14,7 +14,9 @@
 		color: #171717;
 	}
 </style>
-
+<svelte:head>
+  <link rel="icon" href="/favicon.ico" />
+</svelte:head>
 <Navbar config = {config.navbar} notInTop= {page.status !== 200}/>
 
 {@render children()}
