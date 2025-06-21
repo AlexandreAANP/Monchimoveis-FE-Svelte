@@ -20,7 +20,7 @@
     "main_page":{
         "home":{
             "title": "MonchiMóveis",
-            "backgroundImage": "/images/background_main_images.jpg",
+            "backgroundImage": "/Monchimoveis-FE-Svelte//images/background_main_images.jpg",
             "subtitle": "Móveis Rústicos de Madeira Natural",
             "button": {
                 "href":"#about",
